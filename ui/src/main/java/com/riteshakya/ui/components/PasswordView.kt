@@ -117,10 +117,6 @@ class PasswordView @JvmOverloads constructor(
         invalidate()
     }
 
-    fun clear() {
-        hiddenEditView.setText("")
-    }
-
     fun addValidity(function: (String) -> Unit): Observable<Boolean> {
         return count.doOnNext {
             function(hiddenEditView.text.toString())

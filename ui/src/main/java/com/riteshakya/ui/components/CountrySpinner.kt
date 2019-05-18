@@ -46,7 +46,7 @@ class CountrySpinner : AppCompatSpinner, AdapterView.OnItemSelectedListener {
         onItemSelectedListener = this
     }
 
-    fun getCountryFromDialCode(value: String) =
+    private fun getCountryFromDialCode(value: String): Country =
             Country.getAllCountries().first { it.dialCode == value }
 
 

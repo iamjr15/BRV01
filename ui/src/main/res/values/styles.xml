@@ -149,6 +149,7 @@
         <item name="tabTextAppearance">@style/TextAppearance.TabLayout.Text</item>
         <item name="tabTextColor">@color/colorTextDark</item>
         <item name="android:background">@drawable/background_gender_switch</item>
+        <item name="tabIndicatorColor">@color/colorBlack</item>
     </style>
 
     <style name="Widget.HomeTabLayout" parent="CoreAppTheme">

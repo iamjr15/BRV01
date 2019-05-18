@@ -43,7 +43,8 @@ class MenuBottomSheet : BaseBottomSheet() {
     override fun setupDialog(dialog: Dialog, style: Int) {
         contentView = View.inflate(context, R.layout.custom_menu_bottom_sheet, null)
         dialog.setContentView(contentView)
-        val layoutParams = (contentView.parent as View).layoutParams as CoordinatorLayout.LayoutParams
+        val layoutParams =
+                (contentView.parent as View).layoutParams as CoordinatorLayout.LayoutParams
         val behavior = layoutParams.behavior
         if (behavior is BottomSheetBehavior<*>) {
             behavior.setBottomSheetCallback(mBottomSheetBehaviorCallback)
@@ -56,7 +57,7 @@ class MenuBottomSheet : BaseBottomSheet() {
         setTitle(builder.title)
     }
 
-    fun setTitle(title: String) {
+    private fun setTitle(title: String) {
         if (title.isEmpty()) {
             contentView.titleTxt.visibility = GONE
         } else {
@@ -96,13 +97,6 @@ class MenuBottomSheet : BaseBottomSheet() {
 
     override fun dismiss() {
         builder.onMenuSelectedListener!!.onDismiss()
-    }
-
-    fun changeMenuState(actionId: Int, isEnabled: Boolean) {
-        val menuItem = builder.items.find { item -> item.itemId == actionId } ?: return
-        menuItem.enabled = isEnabled
-        menus = ArrayList(builder.items.filter { it.enabled })
-        menuAdapter.setItems(menus)
     }
 
     interface MenuSelectedListener {
@@ -155,7 +149,7 @@ class MenuBottomSheet : BaseBottomSheet() {
         }
     }
 
-    class MenuItem(val itemId: Int, val title: String, var enabled: Boolean = true) : BaseModel(
+    class MenuItem(itemId: Int, val title: String, var enabled: Boolean = true) : BaseModel(
             itemId.toString()
     )
 
