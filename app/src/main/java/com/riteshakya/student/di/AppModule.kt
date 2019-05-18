@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.riteshakya.businesslogic.data.datasource.auth.AuthModule
 import com.riteshakya.businesslogic.data.datasource.image.ImageModule
 import com.riteshakya.businesslogic.data.datasource.school.SchoolModule
+import com.riteshakya.businesslogic.data.datasource.student.StudentModule
 import com.riteshakya.businesslogic.data.datasource.teacher.TeacherModule
 import com.riteshakya.businesslogic.data.datasource.user.UserModule
 import com.riteshakya.core.di.AppViewModelFactory
@@ -36,19 +37,20 @@ abstract class AppModule {
 
         @Provides
         fun provideViewModelFactory(
-                providers: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
+            providers: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
         ): ViewModelProvider.Factory =
-                AppViewModelFactory(providers)
+            AppViewModelFactory(providers)
     }
 
     @Module(
-            includes = [
-                SchoolModule.Repositories::class,
-                UserModule.Repositories::class,
-                TeacherModule.Repositories::class,
-                ImageModule.Repositories::class,
-                AuthModule.Repositories::class
-            ]
+        includes = [
+            SchoolModule.Repositories::class,
+            UserModule.Repositories::class,
+            TeacherModule.Repositories::class,
+            StudentModule.Repositories::class,
+            ImageModule.Repositories::class,
+            AuthModule.Repositories::class
+        ]
     )
     class Repository
 }
