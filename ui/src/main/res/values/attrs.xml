@@ -45,4 +45,9 @@
         <attr name="badgeIsLight" format="boolean" />
 
     </declare-styleable>
+
+    <declare-styleable name="MainButton">
+        <attr name="android:text" format="string" />
+        <attr name="android:src" format="reference" />
+    </declare-styleable>
 </resources>
