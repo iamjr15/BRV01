@@ -42,8 +42,11 @@ class PasswordView @JvmOverloads constructor(
         }
 
 
-    val text: String
+    var text: String
         get() = hiddenEditView!!.text.toString().substring(0, length)
+        set(value) {
+            hiddenEditView!!.setText(value)
+        }
 
     init {
         init()

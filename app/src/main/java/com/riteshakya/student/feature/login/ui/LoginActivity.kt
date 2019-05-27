@@ -13,7 +13,7 @@ class LoginActivity : BaseActivity() {
         fun callingIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }
 
-    override val navHost: NavHostFragment by lazy { nav_host_fragment as NavHostFragment }
+    override val navHost: NavHostFragment? by lazy { nav_host_fragment as NavHostFragment? }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

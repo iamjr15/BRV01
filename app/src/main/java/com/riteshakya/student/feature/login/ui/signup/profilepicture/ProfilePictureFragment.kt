@@ -8,8 +8,12 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.riteshakya.core.image.PhotoFragment
+import com.riteshakya.core.model.SCHOOL
+import com.riteshakya.core.model.STUDENT
+import com.riteshakya.core.model.TEACHER
 import com.riteshakya.student.BuildConfig
 import com.riteshakya.student.R
+import com.riteshakya.student.StudentApp
 import com.riteshakya.student.feature.login.navigation.LoginNavigator
 import com.riteshakya.student.feature.login.vm.SignUpViewModel
 import com.riteshakya.student.navigation.Navigator
@@ -32,26 +36,37 @@ class ProfilePictureFragment : PhotoFragment() {
     private lateinit var mediaPickerBottomSheet: MenuBottomSheet
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_profile_picture, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (signUpViewModel.userRole == SCHOOL)
+            finishBtn.text = "Next"
+
         initializeClickListeners()
         initializeModeChanges()
         initializeMediaPicker()
         imageLoader.loadImage(signUpViewModel.profilePhoto.value ?: "", imageView)
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        StudentApp.instance?.mustDie(this)
+    }
     private fun initializeClickListeners() {
         addImgBtn.setOnClickListener {
             showPhotoOptions()
         }
         finishBtn.setOnClickListener {
-            signUpUser()
+            when {
+                signUpViewModel.userRole == STUDENT -> signUpStudent()
+                signUpViewModel.userRole == TEACHER -> signUpTeacher()
+                signUpViewModel.userRole == SCHOOL -> navigateToLogoUpload()
+            }
         }
     }
 
@@ -71,34 +86,44 @@ class ProfilePictureFragment : PhotoFragment() {
 
     private fun initializeMediaPicker() {
         mediaPickerBottomSheet = MenuBottomSheet.Builder(context!!)
-                .setOnMenuSelectedListener(object : MenuBottomSheet.MenuSelectedListener {
-                    override fun onDismiss() {
-                    }
+            .setOnMenuSelectedListener(object : MenuBottomSheet.MenuSelectedListener {
+                override fun onDismiss() {
+                }
 
-                    override fun onMenuSelected(id: Int) {
-                        when (id) {
-                            R.id.chooseAction -> {
-                                photoPickHelper.requestPickPhoto()
-                            }
-                            R.id.takeAction -> {
-                                photoPickHelper.requestTakePhoto(BuildConfig.APPLICATION_ID)
-                            }
+                override fun onMenuSelected(id: Int) {
+                    when (id) {
+                        R.id.chooseAction -> {
+                            photoPickHelper.requestPickPhoto()
+                        }
+                        R.id.takeAction -> {
+                            photoPickHelper.requestTakePhoto(BuildConfig.APPLICATION_ID)
                         }
                     }
-                })
-                .setTitle("Select")
-                .setMenuItems(R.menu.photo_action_menu)
-                .create()
+                }
+            })
+            .setTitle("Select")
+            .setMenuItems(R.menu.photo_action_menu)
+            .create()
     }
 
-    private fun signUpUser() {
-        signUpViewModel.signUpUser()
-                .addLoading()
-                .subscribe({
-                    mainNavigator.showMain(context!!)
-                    activity?.finishAffinity()
-                }, {})
-                .untilStop()
+    private fun signUpStudent() {
+        signUpViewModel.signUpStudent()
+            .addLoading()
+            .subscribe({
+                mainNavigator.showMain(context!!)
+                activity?.finishAffinity()
+            }, {})
+            .untilStop()
+    }
+
+    private fun signUpTeacher() {
+        signUpViewModel.signUpTeacher()
+            .addLoading()
+            .subscribe({
+                mainNavigator.showMain(context!!)
+                activity?.finishAffinity()
+            }, {})
+            .untilStop()
     }
 
     override fun setUpImage(currentPhotoPath: String) {
@@ -108,5 +133,9 @@ class ProfilePictureFragment : PhotoFragment() {
 
     private fun showPhotoOptions() {
         mediaPickerBottomSheet.show(fragmentManager!!)
+    }
+
+    private fun navigateToLogoUpload() {
+        navigator.navigateToLogoUpload(this)
     }
 }

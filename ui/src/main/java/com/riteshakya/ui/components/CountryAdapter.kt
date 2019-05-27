@@ -66,11 +66,13 @@ class CountryAdapter(
         } else {
             holder = output.tag as ViewHolder
         }
+        holder.icon.setImageResource(getItem(position).flag)
         holder.names.text = getItem(position).dialCode
         return output
     }
 
     internal class ViewHolder(view: View) {
+        var icon: ImageView = view.imageView
         var names: TextView = view.textView
     }
 

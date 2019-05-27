@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/nextBtn"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iconView"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="@dimen/vertical_padding_medium"
+                android:src="@drawable/ic_login_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/titleTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_padding_medium"
+                android:text="Signup."
+                android:textAppearance="@style/TextAppearance.SignUp.Title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iconView" />
+
+            <TextView
+                android:id="@+id/RoleTypeTxt"
+                style="@style/Widget.Form.Input.Role.Type"
+                android:text="@string/txt_school_management_sign_up_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/studentInfoConstraint"
+                style="@style/Widget.Signup.Constraint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/RoleTypeTxt">
+
+                <TextView
+                    android:id="@+id/studentTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/horizontal_padding_medium"
+                    android:layout_marginTop="@dimen/vertical_padding_medium"
+                    android:text="@string/txt_authorities_details"
+                    android:textAppearance="@style/TextAppearance.OnBoarding.Text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.riteshakya.ui.components.CustomSpinner
+                    android:id="@+id/positionSelect"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/background_spinner_border"
+                    android:entries="@array/positionList"
+                    android:theme="@style/AppTheme.InputLayout.Text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/studentTxt"
+                    app:selectedTextAppearance="@style/TextAppearance.Spinner.Medium" />
+
+                <com.riteshakya.ui.components.TextInput
+                    android:id="@+id/firstNameTxt"
+                    style="@style/Widget.Form.Input"
+                    android:layout_marginStart="@dimen/horizontal_padding_medium"
+                    android:layout_marginTop="@dimen/horizontal_padding_medium"
+                    android:layout_marginEnd="@dimen/horizontal_padding_medium"
+                    android:hint="@string/txt_first_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/positionSelect" />
+
+                <com.riteshakya.ui.components.TextInput
+                    android:id="@+id/lastNameTxt"
+                    style="@style/Widget.Form.Input"
+                    android:layout_marginStart="@dimen/horizontal_padding_medium"
+                    android:layout_marginEnd="@dimen/horizontal_padding_medium"
+                    android:hint="@string/txt_last_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/firstNameTxt" />
+
+                <com.riteshakya.ui.components.TextInput
+                    android:id="@+id/schoolEmailTxt"
+                    style="@style/Widget.Form.Input"
+                    android:layout_marginStart="@dimen/horizontal_padding_medium"
+                    android:layout_marginEnd="@dimen/horizontal_padding_medium"
+                    android:hint="@string/txt_email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lastNameTxt" />
+
+                <com.riteshakya.ui.components.TextInput
+                    android:id="@+id/passwordTxt"
+                    style="@style/Widget.Form.Input"
+                    android:layout_marginStart="@dimen/horizontal_padding_medium"
+                    android:layout_marginEnd="@dimen/horizontal_padding_medium"
+                    android:layout_marginBottom="@dimen/vertical_padding"
+                    android:hint="@string/txt_set_password"
+                    android:imeOptions="actionNext"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/schoolEmailTxt"
+                    app:password="true" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parentInfoConstraint"
+                style="@style/Widget.Signup.Constraint"
+                android:layout_marginBottom="@dimen/vertical_padding"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/studentInfoConstraint">
+
+                <TextView
+                    android:id="@+id/schoolInfoTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/horizontal_padding_medium"
+                    android:layout_marginTop="@dimen/vertical_padding_medium"
+                    android:text="@string/txt_school_info"
+                    android:textAppearance="@style/TextAppearance.OnBoarding.Text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.riteshakya.ui.components.TextInput
+                    android:id="@+id/schoolNameTxt"
+                    style="@style/Widget.Form.Input"
+                    android:layout_marginStart="@dimen/horizontal_padding_medium"
+                    android:layout_marginEnd="@dimen/horizontal_padding_medium"
+                    android:hint="@string/txt_school_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/schoolInfoTxt" />
+
+                <com.riteshakya.ui.components.TextInput
+                    android:id="@+id/schoolAreaPinTxt"
+                    style="@style/Widget.Form.Input"
+                    android:layout_marginStart="@dimen/horizontal_padding_medium"
+                    android:layout_marginEnd="@dimen/horizontal_padding_medium"
+                    android:layout_marginBottom="@dimen/horizontal_padding"
+                    android:hint="@string/txt_pincode"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/schoolNameTxt" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/nextBtn"
+        style="@style/Widget.Button"
+        android:enabled="false"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

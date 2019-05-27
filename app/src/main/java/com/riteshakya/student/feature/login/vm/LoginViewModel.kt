@@ -16,14 +16,16 @@ import javax.inject.Singleton
 
 @Singleton
 class LoginViewModel(
-        val loginUserInteractor: LoginUserInteractor,
-        val getSchoolInteractor: GetSchoolsInteractor,
-        val getCurrentUserInteractor: GetCurrentUserInteractor,
-        val logoutUserInteractor: LogoutUserInteractor,
-        val failureMessageMapper: FailureMessageMapper
+    val loginUserInteractor: LoginUserInteractor,
+    val getSchoolInteractor: GetSchoolsInteractor,
+    val getCurrentUserInteractor: GetCurrentUserInteractor,
+    val logoutUserInteractor: LogoutUserInteractor,
+    val failureMessageMapper: FailureMessageMapper
 ) : BaseViewModel() {
 
-    val phoneNo = MutableLiveData<PhoneModel>()
+    // val phoneNo = MutableLiveData<PhoneModel>()
+    var phoneNo = PhoneModel()
+
     val password = MutableLiveData<String>()
     val school = MutableLiveData<String>()
 
@@ -32,16 +34,16 @@ class LoginViewModel(
     }
 
     val schools = schoolsSubject
-            .startWith(true)
-            .flatMapSingle { getSchoolInteractor() }
-            .replay()
-            .autoConnect(1)
+        .startWith(true)
+        .flatMapSingle { getSchoolInteractor() }
+        .replay()
+        .autoConnect(1)
 
     fun loginUser(): Completable {
         return loginUserInteractor(
-                phoneNo.value!!.fullNumber,
-                school.value ?: "",
-                password.value ?: ""
+            phoneNo.fullNumber,
+            school.value ?: "",
+            password.value ?: ""
         )
     }
 

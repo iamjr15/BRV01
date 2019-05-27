@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_onBoardingFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_onBoardingFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
     </fragment>
 
     <fragment
@@ -23,24 +20,43 @@
         android:name="com.riteshakya.student.feature.login.ui.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" />
+
     <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.riteshakya.student.feature.login.ui.signup.SignUpFragment"
-        android:label="SignUpFragment"
-        tools:layout="@layout/fragment_sign_up">
-        <action
-            android:id="@+id/action_signUpFragment_to_passwordFragment"
-            app:destination="@id/passwordFragment" />
-    </fragment>
+        android:id="@+id/roleSelectionFragment"
+        android:name="com.riteshakya.student.feature.login.ui.signup.RoleSelectionFragment"
+        android:label="RoleSelectionFragment"
+        tools:layout="@layout/fragment_role_selection" />
+
     <fragment
-        android:id="@+id/passwordFragment"
-        android:name="com.riteshakya.student.feature.login.ui.signup.password.PasswordFragment"
-        android:label="PasswordFragment"
-        tools:layout="@layout/fragment_password">
+        android:id="@+id/studentSignUpFragment"
+        android:name="com.riteshakya.student.feature.login.ui.signup.StudentSignUpFragment"
+        android:label="StudentSignUpFragment"
+        tools:layout="@layout/fragment_student_sign_up">
         <action
-            android:id="@+id/action_passwordFragment_to_phoneFragment"
+            android:id="@+id/action_signUpFragment_to_phoneFragment"
             app:destination="@id/phoneFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/teacherSignUpFragment"
+        android:name="com.riteshakya.student.feature.login.ui.signup.TeacherSignUpFragment"
+        android:label="TeacherSignUpFragment"
+        tools:layout="@layout/fragment_teacher_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_phoneFragment"
+            app:destination="@id/phoneFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/schoolSignUpFragment"
+        android:name="com.riteshakya.student.feature.login.ui.signup.SchoolSignUpFragment"
+        android:label="SchoolSignUpFragment"
+        tools:layout="@layout/fragment_school_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_phoneFragment"
+            app:destination="@id/phoneFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/phoneFragment"
         android:name="com.riteshakya.student.feature.login.ui.signup.phone.PhoneFragment"
@@ -50,9 +66,17 @@
             android:id="@+id/action_phoneFragment_to_profilePictureFragment"
             app:destination="@id/profilePictureFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/profilePictureFragment"
         android:name="com.riteshakya.student.feature.login.ui.signup.profilepicture.ProfilePictureFragment"
         android:label="ProfilePictureFragment"
         tools:layout="@layout/fragment_profile_picture" />
+
+    <fragment
+        android:id="@+id/logoUploadFragment"
+        android:name="com.riteshakya.student.feature.login.ui.signup.logoupload.LogoUploadFragment"
+        android:label="LogoUploadFragment"
+        tools:layout="@layout/fragment_logo_upload" />
+
 </navigation>

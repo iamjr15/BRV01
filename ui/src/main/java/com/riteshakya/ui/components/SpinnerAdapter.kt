@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.custom_spinner_items_drop_down.view.*
  */
 
 class SpinnerAdapter(
-        applicationContext: Context
+    applicationContext: Context
 ) : ArrayAdapter<SpinnerAdapter.SpinnerModel>(applicationContext, R.layout.custom_spinner_items) {
     private val inflater: LayoutInflater = LayoutInflater.from(applicationContext)
     internal val items: ArrayList<SpinnerModel> = ArrayList()
@@ -60,7 +60,11 @@ class SpinnerAdapter(
             holder = output.tag as DropDownViewHolder
         }
         holder.names.text = getItem(position).text
-        glideLoader.loadImage(getItem(position).icon, holder.icon)
+        if (getItem(position).icon.isNotBlank())
+            glideLoader.loadImage(getItem(position).icon, holder.icon)
+        else
+            holder.icon.visibility = View.GONE
+
         return output
     }
 
@@ -76,6 +80,11 @@ class SpinnerAdapter(
         }
         holder.names.text = getItem(position).text
         holder.names.setTextAppearance(context, selectedTextAppearance)
+        if (getItem(position).icon.isNotBlank())
+            glideLoader.loadImage(getItem(position).icon, holder.icon)
+        else
+            holder.icon.visibility = View.GONE
+
         return output
     }
 
@@ -84,6 +93,7 @@ class SpinnerAdapter(
     }
 
     internal class ViewHolder(view: View) {
+        var icon: ImageView = view.imageView
         var names: TextView = view.textView
     }
 

@@ -18,5 +18,6 @@ fun defaultNavOptions(): NavOptions.Builder {
     navOptionsBuilder.setExitAnim(R.anim.slide_out_left)
     navOptionsBuilder.setPopEnterAnim(R.anim.slide_in_left)
     navOptionsBuilder.setPopExitAnim(R.anim.slide_out_right)
+
     return navOptionsBuilder
 }

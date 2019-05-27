@@ -12,22 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/vertical_padding_small"
         android:textAppearance="@style/TextAppearance.Switch.Text"
-        app:layout_constraintEnd_toStartOf="@id/leftTxt"
+        app:layout_constraintEnd_toStartOf="@id/switchBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem" />
-
-    <TextView
-        android:id="@+id/leftTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/vertical_padding_small"
-        android:layout_marginEnd="@dimen/vertical_padding_small"
-        android:textAppearance="@style/TextAppearance.Switch.Status"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/switchBtn"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="OFF" />
 
     <Switch
         android:id="@+id/switchBtn"
@@ -35,19 +23,32 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/vertical_padding_small"
         android:layout_marginEnd="@dimen/vertical_padding_small"
+        android:checked="true"
         android:theme="@style/AppTheme.InputLayout.Text"
         android:thumb="@drawable/switch_thumb"
         android:track="@drawable/switch_track_state"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/rightTxt"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
-        android:id="@+id/rightTxt"
+        android:id="@+id/offTxt"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/vertical_padding_small"
+        android:layout_marginEnd="12dp"
+        android:textAppearance="@style/TextAppearance.Switch.Status"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="OFF" />
+
+    <TextView
+        android:id="@+id/onTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/vertical_padding_small"
+        android:layout_marginEnd="30dp"
         android:textAppearance="@style/TextAppearance.Switch.Status"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

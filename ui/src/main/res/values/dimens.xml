@@ -14,4 +14,7 @@
     <dimen name="input_icon_padding">24dp</dimen>
     <dimen name="bottomsheet_peek_height">240dp</dimen>
 
+    // CardView
+    <dimen name="card_horizontal_margin">14dp</dimen>
+
 </resources>

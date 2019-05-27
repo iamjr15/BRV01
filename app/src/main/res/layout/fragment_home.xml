@@ -5,19 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <View
+        android:id="@+id/background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/background_header"
+        app:layout_constraintBottom_toBottomOf="@+id/welcomeView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iconView"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="@dimen/vertical_padding_medium"
+        android:src="@drawable/ic_login_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/horizontal_padding"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/logoImg"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="@dimen/horizontal_padding"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="@dimen/horizontal_padding"
         android:layout_marginTop="@dimen/vertical_padding_medium"
-        android:src="@mipmap/ic_launcher"
-        app:civ_border_color="@color/colorBlack"
-        app:civ_border_width="1dp"
+        tools:src="@drawable/ic_school"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+         />
+
+
 
     <com.riteshakya.ui.components.WelcomeView
         android:id="@+id/welcomeView"
@@ -42,9 +61,11 @@
         app:layout_constraintStart_toStartOf="@id/welcomeView"
         app:layout_constraintTop_toTopOf="@id/welcomeView" />
 
+
     <com.riteshakya.ui.components.MainButton
         android:id="@+id/reportBullyingBtn"
         android:layout_width="0dp"
+        android:visibility="gone"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/horizontal_padding_medium"
         android:layout_marginTop="@dimen/vertical_padding_large"
@@ -61,6 +82,7 @@
         android:id="@+id/seePollsBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         android:layout_marginStart="@dimen/horizontal_padding_medium"
         android:layout_marginEnd="@dimen/horizontal_padding_medium"
         android:src="@drawable/ic_polling"
@@ -78,6 +100,7 @@
         android:layout_marginBottom="@dimen/vertical_padding_large"
         android:src="@drawable/ic_request"
         android:text="ask doubts."
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/reportBullyingBtn"
         app:layout_constraintStart_toStartOf="@id/reportBullyingBtn"
@@ -86,6 +109,7 @@
     <com.riteshakya.ui.components.MainButton
         android:id="@+id/checkAssignmentBtn"
         android:layout_width="0dp"
+        android:visibility="gone"
         android:layout_height="0dp"
         android:src="@drawable/ic_sketchbook"
         android:text="check assignment."

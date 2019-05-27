@@ -3,4 +3,10 @@
     <string name="error_no_connection">Something went wrong. Make sure you are connected to the internet</string>
     <string name="error_unknown">Unknown error. Please try again later</string>
     <string name="error_response">We are experiencing some technical difficulties please try again later</string>
+
+    <string name="error_phone_number_length">Phone number must be at least 8 digit long.</string>
+    <string name="error_select_gender">Please select gender.</string>
+    <string name="error_select_class">Please select class.</string>
+    <string name="error_select_section">Please select section.</string>
+    <string name="error_select_position">Please select position.</string>
 </resources>

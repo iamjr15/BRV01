@@ -12,6 +12,7 @@ import com.riteshakya.businesslogic.data.datasource.teacher.TeacherModule
 import com.riteshakya.businesslogic.data.datasource.user.UserModule
 import com.riteshakya.core.di.AppViewModelFactory
 import com.riteshakya.student.StudentApp
+import com.riteshakya.student.data.datasource.geocode.GeocodeModule
 import com.riteshakya.ui.imageloaders.GlideLoader
 import com.riteshakya.ui.imageloaders.IImageLoader
 import dagger.Binds
@@ -49,7 +50,8 @@ abstract class AppModule {
             TeacherModule.Repositories::class,
             StudentModule.Repositories::class,
             ImageModule.Repositories::class,
-            AuthModule.Repositories::class
+            AuthModule.Repositories::class,
+            GeocodeModule.Repositories::class
         ]
     )
     class Repository

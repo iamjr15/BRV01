@@ -9,6 +9,7 @@ import com.riteshakya.core.platform.BaseActivity
 import com.riteshakya.student.R
 import com.riteshakya.student.navigation.Navigator
 import com.riteshakya.ui.adapters.MainPageFragmentAdapter
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -23,8 +24,8 @@ class MainActivity : BaseActivity() {
     @Inject
     internal lateinit var navigator: Navigator
 
-    override val navHost: NavHostFragment? = null
-
+//    override val navHost: NavHostFragment? = null
+    override val navHost: NavHostFragment? by lazy { nav_host_fragment as NavHostFragment? }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

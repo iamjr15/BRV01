@@ -8,4 +8,5 @@ import io.reactivex.Single
 interface UserRepository {
     fun createUser(userId: String, user: BaseUserDto): Completable
     fun getUser(userId: String): Single<BaseUser>
+    fun doesPhoneNumberExist(dialCode: String, phoneNumber: String): Single<Boolean>
 }

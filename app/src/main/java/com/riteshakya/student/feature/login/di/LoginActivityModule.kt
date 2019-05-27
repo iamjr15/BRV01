@@ -13,11 +13,11 @@ import dagger.android.ContributesAndroidInjector
 abstract class LoginActivityModule {
     @PerActivity
     @ContributesAndroidInjector(
-            modules = [FragmentModules::class, CommonViewModels::class]
+        modules = [FragmentModules::class, CommonViewModels::class]
     )
     abstract fun provideLoginActivityFactory(): LoginActivity
 
-    @Module(includes = [OnBoardingModule::class, LoginModule::class, SignUpModule::class])
+    @Module(includes = [LoginModule::class, SignUpModule::class])
     class FragmentModules
 
     @Module
@@ -25,9 +25,9 @@ abstract class LoginActivityModule {
 
         @Provides
         fun provideSignUpViewModel(
-                factory: ViewModelProvider.Factory,
-                target: LoginActivity
+            factory: ViewModelProvider.Factory,
+            target: LoginActivity
         ): SignUpViewModel =
-                ViewModelProviders.of(target, factory).get(SignUpViewModel::class.java)
+            ViewModelProviders.of(target, factory).get(SignUpViewModel::class.java)
     }
 }

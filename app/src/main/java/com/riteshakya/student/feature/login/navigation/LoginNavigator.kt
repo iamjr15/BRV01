@@ -1,5 +1,6 @@
 package com.riteshakya.student.feature.login.navigation
 
+import android.os.Bundle
 import androidx.navigation.ActionOnlyNavDirections
 import com.riteshakya.core.navigation.NavigationController
 import com.riteshakya.core.navigation.NavigationHelper
@@ -11,35 +12,54 @@ import javax.inject.Singleton
 @Singleton
 class LoginNavigator
 @Inject constructor(
-        private val navigationController: NavigationController
+    private val navigationController: NavigationController
 ) {
-    fun navigateToLogin(baseFragment: BaseFragment) {
+    fun navigateToLogin(baseFragment: BaseFragment, args: Bundle = Bundle()) {
         navigationController.navigateTo(
-                baseFragment, NavigationHelper(ActionOnlyNavDirections(R.id.loginFragment))
+            baseFragment, NavigationHelper(ActionOnlyNavDirections(R.id.loginFragment), args)
         )
     }
 
-    fun navigateToSignUp(fragment: BaseFragment) {
+    fun navigateToRoleSelection(baseFragment: BaseFragment, args: Bundle = Bundle()) {
         navigationController.navigateTo(
-                fragment, NavigationHelper(ActionOnlyNavDirections(R.id.signUpFragment))
+            baseFragment,
+            NavigationHelper(ActionOnlyNavDirections(R.id.roleSelectionFragment), args)
         )
     }
 
-    fun navigateToPassword(fragment: BaseFragment) {
+    fun navigateToStudentSignUp(fragment: BaseFragment, args: Bundle = Bundle()) {
         navigationController.navigateTo(
-                fragment, NavigationHelper(ActionOnlyNavDirections(R.id.passwordFragment))
+            fragment, NavigationHelper(ActionOnlyNavDirections(R.id.studentSignUpFragment), args)
         )
     }
 
-    fun navigateToPhone(fragment: BaseFragment) {
+    fun navigateToTeacherSignUp(fragment: BaseFragment, args: Bundle = Bundle()) {
         navigationController.navigateTo(
-                fragment, NavigationHelper(ActionOnlyNavDirections(R.id.phoneFragment))
+            fragment, NavigationHelper(ActionOnlyNavDirections(R.id.teacherSignUpFragment), args)
         )
     }
 
-    fun navigateToProfilePicture(fragment: BaseFragment) {
+    fun navigateToSchoolSignUp(fragment: BaseFragment, args: Bundle = Bundle()) {
         navigationController.navigateTo(
-                fragment, NavigationHelper(ActionOnlyNavDirections(R.id.profilePictureFragment))
+            fragment, NavigationHelper(ActionOnlyNavDirections(R.id.schoolSignUpFragment), args)
+        )
+    }
+
+    fun navigateToPhone(fragment: BaseFragment, args: Bundle = Bundle()) {
+        navigationController.navigateTo(
+            fragment, NavigationHelper(ActionOnlyNavDirections(R.id.phoneFragment))
+        )
+    }
+
+    fun navigateToProfilePicture(fragment: BaseFragment, args: Bundle = Bundle()) {
+        navigationController.navigateTo(
+            fragment, NavigationHelper(ActionOnlyNavDirections(R.id.profilePictureFragment))
+        )
+    }
+
+    fun navigateToLogoUpload(fragment: BaseFragment) {
+        navigationController.navigateTo(
+            fragment, NavigationHelper(ActionOnlyNavDirections(R.id.logoUploadFragment))
         )
     }
 

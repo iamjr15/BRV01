@@ -82,5 +82,4 @@ class SelectInput @JvmOverloads constructor(
             }
         }
     }
-
 }

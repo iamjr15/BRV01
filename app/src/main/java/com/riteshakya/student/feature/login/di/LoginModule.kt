@@ -31,17 +31,17 @@ abstract class LoginModule {
         @IntoMap
         @ViewModelKey(LoginViewModel::class)
         fun provideLoginViewModel(
-                loginUserInteractor: LoginUserInteractor,
-                getSchoolsInteractor: GetSchoolsInteractor,
-                getCurrentUserInteractor: GetCurrentUserInteractor,
-                logoutUserInteractor: LogoutUserInteractor,
-                failureMessageMapper: FailureMessageMapper
+            loginUserInteractor: LoginUserInteractor,
+            getSchoolsInteractor: GetSchoolsInteractor,
+            getCurrentUserInteractor: GetCurrentUserInteractor,
+            logoutUserInteractor: LogoutUserInteractor,
+            failureMessageMapper: FailureMessageMapper
         ): ViewModel = LoginViewModel(
-                loginUserInteractor,
-                getSchoolsInteractor,
-                getCurrentUserInteractor,
-                logoutUserInteractor,
-                failureMessageMapper
+            loginUserInteractor,
+            getSchoolsInteractor,
+            getCurrentUserInteractor,
+            logoutUserInteractor,
+            failureMessageMapper
         )
     }
 
@@ -50,9 +50,9 @@ abstract class LoginModule {
 
         @Provides
         fun provideLoginViewModel(
-                factory: ViewModelProvider.Factory,
-                target: LoginFragment
+            factory: ViewModelProvider.Factory,
+            target: LoginFragment
         ): LoginViewModel =
-                ViewModelProviders.of(target, factory).get(LoginViewModel::class.java)
+            ViewModelProviders.of(target, factory).get(LoginViewModel::class.java)
     }
 }

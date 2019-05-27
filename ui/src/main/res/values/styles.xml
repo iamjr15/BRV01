@@ -11,7 +11,7 @@
 
     <style name="Widget.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">70dp</item>
+        <item name="android:layout_height">64dp</item>
         <item name="android:layout_gravity">bottom</item>
         <item name="android:textAppearance">@style/TextAppearance.Button.Outline</item>
         <item name="android:textColor">@color/colorTextLight</item>
@@ -27,12 +27,22 @@
         <item name="rippleColor">@color/colorTextLight</item>
     </style>
 
+    <style name="Widget.Button.OutlinedButton.Curved" parent="Widget.Button.OutlinedButton">
+        <item name="android:textAppearance">@style/TextAppearance.Button.Outline.Curved</item>
+        <item name="android:textColor">@color/colorTextDark</item>
+        <item name="strokeColor">@color/colorTextDark</item>
+        <item name="cornerRadius">7dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="rippleColor">@color/colorTextDark</item>
+
+    </style>
+
     <style name="Widget.Button.OutlinedButton.Small" parent="Widget.Button.OutlinedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:textAppearance">@style/TextAppearance.Button.Outline.Small</item>
-        <item name="android:layout_marginStart">@dimen/horizontal_padding_large</item>
-        <item name="android:layout_marginEnd">@dimen/horizontal_padding_large</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_padding</item>
+        <item name="android:layout_marginEnd">@dimen/horizontal_padding</item>
         <item name="android:textColor">@color/button_background_tint_state</item>
     </style>
 
@@ -40,6 +50,13 @@
     <style name="AppTheme.InputLayout.Text" parent="Theme.MaterialComponents.Light">
         <!-- Inactive underline color-->
         <item name="colorControlNormal">@color/colorTextLight</item>
+        <!-- Cursor and Active underline color, uses colorAccent by default if not defined-->
+        <item name="colorControlActivated">@color/colorTextDark</item>
+    </style>
+
+    <style name="AppTheme.InputLayout.Tab" parent="Theme.MaterialComponents.Light">
+        <!-- Inactive underline color-->
+        <item name="colorControlNormal">#e67e8791</item>
         <!-- Cursor and Active underline color, uses colorAccent by default if not defined-->
         <item name="colorControlActivated">@color/colorTextDark</item>
     </style>
@@ -89,6 +106,30 @@
         <item name="android:layout_marginEnd">@dimen/horizontal_padding_large</item>
     </style>
 
+    <style name="Widget.Form.Input.Role.Type" parent="CoreAppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginStart">@dimen/horizontal_padding_large</item>
+        <item name="android:layout_marginEnd">@dimen/horizontal_padding_large</item>
+        <item name="android:layout_marginTop">@dimen/vertical_padding</item>
+        <item name="android:background">@drawable/background_role_type</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.SignUp.RoleType</item>
+    </style>
+
+    <style name="Widget.Form.Input.Cards" parent="Widget.Form.Input">
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+    </style>
+
+    <style name="Widget.CardView" parent="Base.CardView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/card_horizontal_margin</item>
+        <item name="android:layout_marginEnd">@dimen/card_horizontal_margin</item>
+        <item name="cardCornerRadius">0dp</item>
+    </style>
+
     <style name="Widget.Button.Bottom" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">44dp</item>
@@ -109,8 +150,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:layout_gravity">bottom</item>
-        <item name="android:layout_marginEnd">@dimen/horizontal_padding_medium</item>
-        <item name="android:layout_marginStart">@dimen/horizontal_padding_medium</item>
+        <item name="android:layout_marginEnd">18dp</item>
+        <item name="android:layout_marginStart">18dp</item>
         <item name="android:layout_marginBottom">@dimen/horizontal_padding_medium</item>
         <item name="android:elevation">0dp</item>
         <item name="android:insetLeft">0dp</item>
@@ -138,12 +179,12 @@
     </style>
 
     <style name="Widget.TabAsSwitch" parent="CoreAppTheme">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">40dp</item>
-        <item name="tabIndicatorHeight">40dp</item>
-        <item name="tabGravity">center</item>
-        <item name="tabPaddingEnd">@dimen/horizontal_padding_large</item>
-        <item name="tabPaddingStart">@dimen/horizontal_padding_large</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="tabIndicatorHeight">42dp</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabPaddingEnd">0dp</item>
+        <item name="tabPaddingStart">0dp</item>
         <item name="tabSelectedTextColor">@color/colorWhite</item>
         <item name="tabRippleColor">@null</item>
         <item name="tabTextAppearance">@style/TextAppearance.TabLayout.Text</item>
@@ -152,11 +193,20 @@
         <item name="tabIndicatorColor">@color/colorBlack</item>
     </style>
 
+    <style name="Widget.Signup.Constraint" parent="CoreAppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">18dp</item>
+        <item name="android:layout_marginStart">18dp</item>
+        <item name="android:layout_marginTop">@dimen/vertical_padding_small</item>
+        <item name="android:background">@drawable/background_signup_info</item>
+    </style>
+
     <style name="Widget.HomeTabLayout" parent="CoreAppTheme">
         <item name="android:layout_height">50dp</item>
         <item name="tabIndicatorHeight">0dp</item>
         <item name="android:background">@drawable/background_top_border</item>
-        <item name="android:theme">@style/AppTheme.InputLayout.Text</item>
+        <item name="android:theme">@style/AppTheme.InputLayout.Tab</item>
     </style>
 
     <style name="Widget.Welcome.Badge" parent="CoreAppTheme">

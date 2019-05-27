@@ -23,11 +23,11 @@ import javax.inject.Singleton
 @Singleton
 class FirestoreUserRepository
 @Inject constructor(
-        private var schoolRepository: Provider<SchoolRepository>
+    private var schoolRepository: Provider<SchoolRepository>
 ) : UserRepository {
     private val userCollection by lazy {
         FirebaseFirestore.getInstance().collection(
-                DatabaseName.TABLE_USERS
+            DatabaseName.TABLE_USERS
         )
     }
 
@@ -72,6 +72,23 @@ class FirestoreUserRepository
             else -> {
                 Single.just(BaseUser(ERROR))
             }
+        }
+    }
+
+    override fun doesPhoneNumberExist(dialCode: String, phoneNumber: String): Single<Boolean> {
+        return Single.create { emitter ->
+            userCollection
+                .whereEqualTo("phone_no.dial_code", dialCode)
+                .whereEqualTo("phone_no.phone_no", phoneNumber)
+                .limit(1)
+                .get().addOnCompleteListener {
+                    when {
+                        it.isSuccessful ->
+                            emitter.onSuccess(it.result != null && it.result!!.size() > 0)
+                        else ->
+                            emitter.onError(it.exception!!)
+                    }
+                }
         }
     }
 }

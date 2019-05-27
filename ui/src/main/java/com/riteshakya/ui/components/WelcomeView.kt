@@ -48,8 +48,8 @@ class WelcomeView @JvmOverloads constructor(
             field = value
             val textAppearance =
                     if (value) R.style.TextAppearance_Welcome_Badge_Light else R.style.TextAppearance_Welcome_Badge
-            val background =
-                    if (value) R.drawable.background_welcome_badge_light else R.drawable.background_welcome_badge
+            val background = R.drawable.background_welcome_badge
+//                    if (value) R.drawable.background_welcome_badge_light else R.drawable.background_welcome_badge
             profileBadge.setTextAppearance(context, textAppearance)
             profileBadge.setBackgroundResource(background)
         }

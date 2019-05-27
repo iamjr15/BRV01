@@ -1,36 +1,59 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     // Onboarding
-    <string name="txt_on_boarding_title">testapp.</string>
-    <string name="txt_on_boarding_subtitle">students</string>
-    <string name="txt_on_boarding_signup">signup.</string>
-    <string name="txt_on_boarding_login">login.</string>
+    <string name="txt_on_boarding_title">Welcome\nOnboard.</string>
+    <string name="txt_on_boarding_enter_phone_number">Enter your phone\nnumber to\ncontinue.</string>
 
     // Login
     <string name="txt_login_title">login.</string>
-    <string name="txt_login_subtitle">Welcome back.</string>
-
-    // Form Item
-    <string name="txt_contact_number">contact number</string>
+    <string name="txt_login_subtitle">Enter password.</string>
+    <string name="txt_login_forgot_password" tools:ignore="ExtraTranslation">forgot password?</string>
+    <string name="txt_login_message">Phone number already exists, enter password to login.</string>
     <string name="txt_password">password</string>
     <string name="txt_school">school</string>
-    <string name="txt_name_of_authority">name of authority</string>
-    <string name="txt_school_name">school name</string>
-    <string name="txt_school_e_mail">school e-mail</string>
-    <string name="txt_school_area_pincode">school area pincode</string>
-    <string name="txt_city_name">city name</string>
-    <string name="txt_first_name">first name.</string>
-    <string name="txt_last_name">last name.</string>
 
-    // Sign up
+    // Sign Up
+    <string name="txt_sign_up_title">signup.</string>
+    <string name="txt_sign_up_message">Phone number does not exist on our system, please signup.</string>
+
+    // Role Selection
+    <string name="txt_role_selection_subtitle">I\'M A…</string>
+
+    // Student/Parent Sign Up
+    <string name="txt_student_parent_sign_up_title">student/parent</string>
+    <string name="txt_student_details">Student Details.</string>
+    <string name="txt_parent_details">Parent Details.</string>
+
+    // Teacher Sign Up
+    <string name="txt_teacher_sign_up_title">teacher</string>
+    <string name="subject_taught">Subject taught</string>
     <string name="txt_are_you_a_class_teacher">are you a class teacher?</string>
     <string name="txt_school_not_listed">school not listed? </string>
     <string name="txt_add_here">add here</string>
+
+    // School Management Sign Up
+    <string name="txt_school_management_sign_up_title">school management</string>
+    <string name="txt_school_management_sign_up_subtitle">Management Member</string>
+    <string name="txt_authorities_details">Authority Details.</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_school_info">School Information</string>
+    <string name="txt_school_name">school name</string>
+    <string name="txt_pincode">pincode</string>
+
+    // Common Form Fields
+    <string name="txt_first_name">First Name</string>
+    <string name="txt_last_name">Last Name</string>
+    <string name="txt_select_school">Select School</string>
+    <string name="txt_set_password">Set Password</string>
 
     // Phone
     <string name="txt_what_s_your_number">What\'s your number?</string>
     <string name="txt_send_code">Send Code</string>
     <string name="txt_resend_code">Resend Code</string>
     <string name="txt_verify_code">Verify Code</string>
+    <string name="txt_phone_verification">Phone verification.</string>
+
+    // Logo Upload
+    <string name="txt_logo_subtitle">Finally, the last step. Upload the logo of your school which appears on top of every students\' and teachers\' screen.</string>
 
     // Common
     <string name="txt_no">no</string>
@@ -38,4 +61,5 @@
 
     // Form Button
     <string name="txt_login">Login</string>
+
 </resources>

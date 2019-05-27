@@ -6,16 +6,17 @@ import com.riteshakya.core.model.PhoneModel
 import com.riteshakya.core.model.STUDENT
 
 class StudentModel(
-        val firstName: String = "",
-        val lastName: String = "",
-        val school: String = "",
-        @Gender val gender: String = MALE,
-        val className: String = "",
-        val section: String = "",
-        val phoneNo: PhoneModel = PhoneModel(),
-        val profilePicture: String = "",
-        val password: String = "",
-        val id: String = ""
+    val firstName: String = "",
+    val lastName: String = "",
+    val school: String = "",
+    @Gender val gender: String = MALE,
+    val className: String = "",
+    val section: String = "",
+    var parent: ParentModel = ParentModel(),
+    val phoneNo: PhoneModel = PhoneModel(),
+    val profilePicture: String = "",
+    val password: String = "",
+    val id: String = ""
 ) : BaseUser(STUDENT) {
     lateinit var schoolModel: SchoolModel
 }

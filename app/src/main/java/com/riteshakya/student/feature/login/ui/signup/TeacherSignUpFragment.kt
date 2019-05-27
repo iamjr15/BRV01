@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.riteshakya.businesslogic.repository.student.model.FEMALE
-import com.riteshakya.businesslogic.repository.student.model.MALE
+import com.riteshakya.core.model.TEACHER
 import com.riteshakya.core.platform.BaseFragment
 import com.riteshakya.core.validation.types.NameValidation
+import com.riteshakya.core.validation.types.NonEmptyValidation
+import com.riteshakya.core.validation.types.PasswordValidation
 import com.riteshakya.student.R
+import com.riteshakya.student.StudentApp
 import com.riteshakya.student.feature.login.navigation.LoginNavigator
 import com.riteshakya.student.feature.login.vm.SignUpViewModel
 import com.riteshakya.ui.components.SpinnerAdapter
-import kotlinx.android.synthetic.main.fragment_sign_up.*
+import kotlinx.android.synthetic.main.fragment_teacher_sign_up.*
 import javax.inject.Inject
 
-class SignUpFragment : BaseFragment() {
+class TeacherSignUpFragment : BaseFragment() {
+
     @Inject
     internal lateinit var navigator: LoginNavigator
 
@@ -26,19 +29,20 @@ class SignUpFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_sign_up, container, false)
+    ): View = inflater.inflate(R.layout.fragment_teacher_sign_up, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        nextBtn.setOnClickListener {
-            navigateToPassword()
-        }
+
         initializeValidators()
-        initializeSchools()
         initializeVm()
+        initializeSchools()
+        addListeners()
     }
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        StudentApp.instance?.mustDie(this)
+    }
     private fun initializeValidators() {
         addValidationList(firstNameTxt.addValidity(NameValidation(), {
             signUpViewModel.firstName.value = it
@@ -49,24 +53,21 @@ class SignUpFragment : BaseFragment() {
         addValidationList(schoolSelect.addValidity {
             signUpViewModel.school.value = it
         })
-        genderSwitch.addOnTabSelectedListener {
-            signUpViewModel.gender.value = if (it == 0) MALE else FEMALE
-        }
-        classSelect.onItemChanged {
-            signUpViewModel.classValue.value = it
-        }
-        sectionSelect.onItemChanged {
-            signUpViewModel.sectionValue.value = it
-        }
+        addValidationList(subjectTxt.addValidity(NonEmptyValidation(), {
+            signUpViewModel.subject.value = it
+        }))
+        addValidationList(passwordTxt.addValidity(PasswordValidation(), {
+            signUpViewModel.password.value = it
+        }))
     }
 
     private fun initializeVm() {
         firstNameTxt.setText(signUpViewModel.firstName.value)
         lastNameTxt.setText(signUpViewModel.lastName.value)
         schoolSelect.setSelection(signUpViewModel.school.value)
-        classSelect.setSelection(signUpViewModel.classValue.value)
-        sectionSelect.setSelection(signUpViewModel.sectionValue.value)
-        genderSwitch.setScrollPosition(if (signUpViewModel.gender.value == MALE) 0 else 1)
+        subjectTxt.setText(signUpViewModel.subject.value)
+        passwordTxt.setText(signUpViewModel.password.value)
+        teacherSwitch.isChecked = signUpViewModel.teacher.value ?: true
     }
 
     private fun initializeSchools() {
@@ -83,8 +84,27 @@ class SignUpFragment : BaseFragment() {
             .untilStop()
     }
 
-    private fun navigateToPassword() {
-        navigator.navigateToPassword(this)
+    private fun addListeners() {
+        teacherSwitch.setOnCheckedChangeListener {
+            signUpViewModel.teacher.value = it
+        }
+
+        addHereTxt.setOnClickListener {
+            navigateToSchoolSignUp()
+        }
+
+        nextBtn.setOnClickListener {
+            navigateToPhone()
+        }
+    }
+
+    private fun navigateToSchoolSignUp() {
+        navigator.navigateToSchoolSignUp(this)
+    }
+
+    private fun navigateToPhone() {
+        signUpViewModel.userRole = TEACHER
+        navigator.navigateToPhone(this)
     }
 
     override fun setValidity(result: Boolean) {

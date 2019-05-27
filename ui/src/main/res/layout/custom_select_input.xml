@@ -13,6 +13,7 @@
         android:textColor="@color/colorTextDark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         tools:text="@tools:sample/lorem" />
 
     <com.riteshakya.ui.components.CustomSpinner
@@ -20,7 +21,6 @@
         style="@style/SpinnerTheme"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginTop="18dp"
         android:background="@drawable/edit_text_material_without_padding"
         android:theme="@style/AppTheme.InputLayout.Text"
         app:layout_constraintBottom_toBottomOf="parent"

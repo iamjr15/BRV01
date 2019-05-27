@@ -66,5 +66,8 @@ dependencies {
     // Permission Helper
     api 'com.karumi:dexter:5.0.0'
 
-    api 'com.github.yalantis:ucrop:2.2.3'
+    //api 'com.github.yalantis:ucrop:2.2.3'
+
+    // Image Cropper Library
+    api  'com.soundcloud.android:android-crop:1.0.1@aar'
 }
