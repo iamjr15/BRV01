@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.riteshakya.core.extension.hideKeyboard
+import com.riteshakya.core.extension.showError
 import com.riteshakya.core.model.TEACHER
+import com.riteshakya.core.platform.BaseActivity
 import com.riteshakya.core.platform.BaseFragment
 import com.riteshakya.core.validation.types.NameValidation
 import com.riteshakya.core.validation.types.NonEmptyValidation
@@ -13,6 +16,7 @@ import com.riteshakya.student.R
 import com.riteshakya.student.StudentApp
 import com.riteshakya.student.feature.login.navigation.LoginNavigator
 import com.riteshakya.student.feature.login.vm.SignUpViewModel
+import com.riteshakya.ui.components.CustomSpinner
 import com.riteshakya.ui.components.SpinnerAdapter
 import kotlinx.android.synthetic.main.fragment_teacher_sign_up.*
 import javax.inject.Inject
@@ -39,10 +43,12 @@ class TeacherSignUpFragment : BaseFragment() {
         initializeSchools()
         addListeners()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         StudentApp.instance?.mustDie(this)
     }
+
     private fun initializeValidators() {
         addValidationList(firstNameTxt.addValidity(NameValidation(), {
             signUpViewModel.firstName.value = it
@@ -74,12 +80,22 @@ class TeacherSignUpFragment : BaseFragment() {
         signUpViewModel.schools
             .addLoading()
             .subscribe {
-                schoolSelect.items =
+                val schoolList =
                     it.map { school ->
                         SpinnerAdapter.SpinnerModel(
                             school.id, school.schoolName, school.schoolLogo
                         )
                     }
+
+                // Add "Select School" with -1 id as first item
+                val finalSchoolList = listOf(
+                    SpinnerAdapter.SpinnerModel(
+                        "-1",
+                        getString(R.string.txt_select_school)
+                    )
+                ) + schoolList
+
+                schoolSelect.items = finalSchoolList
             }
             .untilStop()
     }
@@ -94,7 +110,17 @@ class TeacherSignUpFragment : BaseFragment() {
         }
 
         nextBtn.setOnClickListener {
-            navigateToPhone()
+            when {
+                schoolSelect.findViewById<CustomSpinner>(R.id.spinner).selectedItemPosition == 0 -> {
+                    activity?.hideKeyboard()
+                    (activity as BaseActivity).showError(
+                        getString(com.riteshakya.ui.R.string.error_select_school)
+                    )
+                }
+                else -> {
+                    navigateToPhone()
+                }
+            }
         }
     }
 

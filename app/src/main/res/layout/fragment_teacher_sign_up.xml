@@ -84,7 +84,7 @@
                 style="@style/Widget.Form.Input"
                 android:layout_marginStart="36dp"
                 android:layout_marginEnd="36dp"
-                android:hint="@string/subject_taught"
+                android:hint="@string/txt_subject_taught"
                 android:imeOptions="actionNext"
                 android:inputType="textCapWords"
                 app:layout_constraintEnd_toEndOf="parent"

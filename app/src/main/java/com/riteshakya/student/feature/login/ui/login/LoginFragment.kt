@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.riteshakya.core.contants.Args
+import com.riteshakya.core.extension.hideKeyboard
+import com.riteshakya.core.extension.showError
 import com.riteshakya.core.extension.showSnackbar
 import com.riteshakya.core.model.PhoneModel
-import com.riteshakya.core.model.STUDENT
 import com.riteshakya.core.platform.BaseActivity
 import com.riteshakya.core.platform.BaseFragment
 import com.riteshakya.core.validation.types.PasswordValidation
@@ -16,6 +17,7 @@ import com.riteshakya.student.StudentApp
 import com.riteshakya.student.feature.login.navigation.LoginNavigator
 import com.riteshakya.student.feature.login.vm.LoginViewModel
 import com.riteshakya.student.navigation.Navigator
+import com.riteshakya.ui.components.CustomSpinner
 import com.riteshakya.ui.components.SpinnerAdapter
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
@@ -39,20 +41,32 @@ class LoginFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         readArguments()
-        initializeValidators()
         initializeInputsFromVM()
+        initializeValidators()
         loginBtn.setOnClickListener {
-            loginUser()
+            when {
+                schoolSelect.findViewById<CustomSpinner>(R.id.spinner).selectedItemPosition == 0 -> {
+                    activity?.hideKeyboard()
+                    (activity as BaseActivity).showError(
+                        getString(com.riteshakya.ui.R.string.error_select_school)
+                    )
+                }
+                else -> {
+                    loginUser()
+                }
+            }
         }
         forgotPasswordTxt.setOnClickListener {
             showMessage("Under Development")
         }
         initializeSchools()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         StudentApp.instance?.mustDie(this)
     }
+
     private fun readArguments() {
         if (arguments != null) {
             if (arguments!!.containsKey(Args.KEY_DIAL_CODE) && arguments!!.containsKey(Args.KEY_PHONE_NO)) {
@@ -109,12 +123,22 @@ class LoginFragment : BaseFragment() {
         loginViewModel.schools
             .addLoading()
             .subscribe({
-                schoolSelect.items =
+                val schoolList =
                     it.map { school ->
                         SpinnerAdapter.SpinnerModel(
                             school.id, school.schoolName, school.schoolLogo
                         )
                     }
+
+                // Add "Select School" with -1 id as first item
+                val finalSchoolList = listOf(
+                    SpinnerAdapter.SpinnerModel(
+                        "-1",
+                        getString(R.string.txt_select_school)
+                    )
+                ) + schoolList
+
+                schoolSelect.items = finalSchoolList
             }, {})
             .untilStop()
     }

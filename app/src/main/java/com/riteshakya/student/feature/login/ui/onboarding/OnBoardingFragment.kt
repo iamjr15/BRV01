@@ -76,10 +76,12 @@ class OnBoardingFragment : BaseFragment() {
             })
             .untilStop()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         StudentApp.instance?.mustDie(this)
     }
+
     private fun navigateToRoleSelection() {
         val args = Bundle()
         args.putString(Args.KEY_DIAL_CODE, countrySpinner.dialCode)

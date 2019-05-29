@@ -1,6 +1,7 @@
 package com.riteshakya.student.feature.login.ui.signup
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.riteshakya.student.R
 import com.riteshakya.student.StudentApp
 import com.riteshakya.student.feature.login.navigation.LoginNavigator
 import com.riteshakya.student.feature.login.vm.SignUpViewModel
+import com.riteshakya.ui.components.CustomSpinner
 import com.riteshakya.ui.components.SpinnerAdapter
 import kotlinx.android.synthetic.main.fragment_student_sign_up.*
 import javax.inject.Inject
@@ -48,10 +50,12 @@ class StudentSignUpFragment : BaseFragment() {
         // Hide extra tab
         (genderSwitch.getChildAt(0) as ViewGroup).getChildAt(0).visibility = View.GONE
     }
+
     override fun onDestroy() {
         super.onDestroy()
         StudentApp.instance?.mustDie(this)
     }
+
     private fun initializeValidators() {
         addValidationList(firstNameTxt.addValidity(NameValidation(), {
             signUpViewModel.firstName.value = it
@@ -87,6 +91,10 @@ class StudentSignUpFragment : BaseFragment() {
         schoolSelect.setSelection(signUpViewModel.school.value)
         classSelect.setSelection(signUpViewModel.classValue.value)
         sectionSelect.setSelection(signUpViewModel.sectionValue.value)
+        if (signUpViewModel.parent.value != null) {
+            parentFirstNameTxt.setText(signUpViewModel.parent.value!!.firstName)
+            parentLastNameTxt.setText(signUpViewModel.parent.value!!.lastName)
+        }
         passwordTxt.setText(signUpViewModel.password.value)
     }
 
@@ -94,12 +102,22 @@ class StudentSignUpFragment : BaseFragment() {
         signUpViewModel.schools
             .addLoading()
             .subscribe {
-                schoolSelect.items =
+                val schoolList =
                     it.map { school ->
                         SpinnerAdapter.SpinnerModel(
                             school.id, school.schoolName, school.schoolLogo
                         )
                     }
+
+                // Add "Select School" with -1 id as first item
+                val finalSchoolList = listOf(
+                    SpinnerAdapter.SpinnerModel(
+                        "-1",
+                        getString(R.string.txt_select_school)
+                    )
+                ) + schoolList
+
+                schoolSelect.items = finalSchoolList
             }
             .untilStop()
     }
@@ -122,6 +140,12 @@ class StudentSignUpFragment : BaseFragment() {
 
         nextBtn.setOnClickListener {
             when {
+                schoolSelect.findViewById<CustomSpinner>(R.id.spinner).selectedItemPosition == 0 -> {
+                    activity?.hideKeyboard()
+                    (activity as BaseActivity).showError(
+                        getString(com.riteshakya.ui.R.string.error_select_school)
+                    )
+                }
                 genderSwitch.selectedTabPosition == 0 -> {
                     activity?.hideKeyboard()
                     (activity as BaseActivity).showError(

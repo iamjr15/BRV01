@@ -1,6 +1,7 @@
 package com.riteshakya.student.feature.login.ui.signup.profilepicture
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -34,6 +35,9 @@ class ProfilePictureFragment : PhotoFragment() {
     internal lateinit var mainNavigator: Navigator
 
     private lateinit var mediaPickerBottomSheet: MenuBottomSheet
+
+    // Variable to restrict multiple instance of camera or gallery to be opened
+    private var bottomSheetActionHandled: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -91,12 +95,16 @@ class ProfilePictureFragment : PhotoFragment() {
                 }
 
                 override fun onMenuSelected(id: Int) {
-                    when (id) {
-                        R.id.chooseAction -> {
-                            photoPickHelper.requestPickPhoto()
-                        }
-                        R.id.takeAction -> {
-                            photoPickHelper.requestTakePhoto(BuildConfig.APPLICATION_ID)
+                    if(!bottomSheetActionHandled) {
+                        when (id) {
+                            R.id.chooseAction -> {
+                                photoPickHelper.requestPickPhoto()
+                                bottomSheetActionHandled = true
+                            }
+                            R.id.takeAction -> {
+                                photoPickHelper.requestTakePhoto(BuildConfig.APPLICATION_ID)
+                                bottomSheetActionHandled = true
+                            }
                         }
                     }
                 }
@@ -132,6 +140,7 @@ class ProfilePictureFragment : PhotoFragment() {
     }
 
     private fun showPhotoOptions() {
+        bottomSheetActionHandled = false
         mediaPickerBottomSheet.show(fragmentManager!!)
     }
 

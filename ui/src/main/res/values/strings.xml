@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">UI</string>
     <string name="txt_phone_hint">55555 55555</string>
+    <string name="txt_select_school">Select School</string>
 </resources>

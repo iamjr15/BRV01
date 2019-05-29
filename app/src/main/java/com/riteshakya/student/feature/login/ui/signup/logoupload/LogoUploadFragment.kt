@@ -34,6 +34,9 @@ class LogoUploadFragment : PhotoFragment() {
     internal lateinit var mainNavigator: Navigator
     private lateinit var mediaPickerBottomSheet: MenuBottomSheet
 
+    // Variable to restrict multiple instance of camera or gallery to be opened
+    private var bottomSheetActionHandled: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -93,12 +96,16 @@ class LogoUploadFragment : PhotoFragment() {
                 }
 
                 override fun onMenuSelected(id: Int) {
-                    when (id) {
-                        R.id.chooseAction -> {
-                            photoPickHelper.requestPickPhoto()
-                        }
-                        R.id.takeAction -> {
-                            photoPickHelper.requestTakePhoto(BuildConfig.APPLICATION_ID)
+                    if(!bottomSheetActionHandled) {
+                        when (id) {
+                            R.id.chooseAction -> {
+                                photoPickHelper.requestPickPhoto()
+                                bottomSheetActionHandled = true
+                            }
+                            R.id.takeAction -> {
+                                photoPickHelper.requestTakePhoto(BuildConfig.APPLICATION_ID)
+                                bottomSheetActionHandled = true
+                            }
                         }
                     }
                 }
@@ -114,6 +121,7 @@ class LogoUploadFragment : PhotoFragment() {
     }
 
     private fun showPhotoOptions() {
+        bottomSheetActionHandled = false
         mediaPickerBottomSheet.show(fragmentManager!!)
     }
 }
