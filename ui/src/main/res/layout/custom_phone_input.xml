@@ -3,42 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/hintTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.TextInput.Hint"
-        android:textColor="@color/colorTextDark"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/lorem" />
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/horizontal_padding_small"
+    android:paddingEnd="@dimen/horizontal_padding_small">
 
     <com.riteshakya.ui.components.CountrySpinner
         android:id="@+id/countrySpinner"
         style="@style/SpinnerTheme"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="0dp"
-        android:layout_marginTop="18dp"
+        android:background="@drawable/background_country_spinner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/separatorView"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/horizontal_padding_medium"
+        android:layout_marginBottom="@dimen/horizontal_padding_medium"
+        android:background="@color/colorBlack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/countrySpinner"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.riteshakya.ui.components.CustomFontTextInputEditText
         android:id="@+id/inputTxt"
         style="@style/AppTheme.TextInputEditText"
         android:layout_width="0dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="@dimen/horizontal_padding"
+        android:background="@android:color/transparent"
+        android:hint="@string/txt_phone_hint"
         android:imeOptions="actionNext"
         android:inputType="number"
         android:paddingEnd="@dimen/input_icon_padding"
         android:theme="@style/AppTheme.InputLayout.Text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/countrySpinner"
+        app:layout_constraintStart_toEndOf="@id/separatorView"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry" />
+
+
 
     <ViewFlipper
         android:id="@+id/inputStatus"

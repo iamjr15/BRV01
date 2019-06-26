@@ -9,6 +9,7 @@ data class TeacherModel(
         val firstName: String = "",
         val lastName: String = "",
         val school: String = "",
+        val subject: String = "",
         val isTeacher: Boolean = false,
         val className: String = "",
         val section: String = "",

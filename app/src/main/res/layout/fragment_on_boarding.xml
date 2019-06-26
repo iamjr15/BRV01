@@ -9,10 +9,10 @@
         android:id="@+id/titleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/horizontal_padding"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="26dp"
         android:text="@string/txt_on_boarding_title"
-        android:textAppearance="@style/TextAppearance.Title"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAppearance="@style/TextAppearance.OnBoarding.Title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,29 +20,51 @@
         android:id="@+id/subtitleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/horizontal_padding"
-        android:text="@string/txt_on_boarding_subtitle"
-        android:textAppearance="@style/TextAppearance.SubTitle"
-        app:layout_constraintBottom_toTopOf="@id/signUpBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTxt"
-        app:layout_constraintVertical_bias="0" />
-
-    <Button
-        android:id="@+id/loginBtn"
-        style="@style/Widget.Button.OutlinedButton"
-        android:text="@string/txt_on_boarding_login"
-        app:layout_constraintBottom_toTopOf="@id/signUpBtn"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="21dp"
+        android:text="@string/txt_on_boarding_enter_phone_number"
+        android:textAppearance="@style/TextAppearance.OnBoarding.Text"
+        app:layout_constraintBottom_toTopOf="@id/phoneSelectorCard"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/signUpBtn"
-        style="@style/Widget.Button.OutlinedButton"
-        android:text="@string/txt_on_boarding_signup"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/phoneSelectorCard"
+        style="@style/Widget.CardView"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.riteshakya.ui.components.PhoneInput
+                android:id="@+id/phoneSelector"
+                style="@style/Widget.Form.Input.Cards"
+                android:layout_width="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/nextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/nextView"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="@dimen/horizontal_padding_medium"
+                android:layout_marginEnd="@dimen/horizontal_padding_medium"
+                android:paddingStart="10dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="12dp"
+                android:src="@drawable/ic_forward_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

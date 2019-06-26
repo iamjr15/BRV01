@@ -5,7 +5,9 @@ import com.riteshakya.businesslogic.data.model.PhoneDto
 import com.riteshakya.core.model.SCHOOL
 
 data class SchoolDto(
-        var name_of_authority: String = "",
+        var authority_position: String = "",
+        var first_name: String = "",
+        var last_name: String = "",
         var name: String = "",
         var email: String = "",
         var area: String = "",

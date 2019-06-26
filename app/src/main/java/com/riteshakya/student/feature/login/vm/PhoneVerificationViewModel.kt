@@ -24,7 +24,7 @@ class PhoneVerificationViewModel(
     }
 
     val phoneNo = MutableLiveData<PhoneModel>()
-    val code = MutableLiveData<String>()
+    var code = MutableLiveData<String>()
 
     val isVerified = MutableLiveData<Boolean>().also {
         it.value = false
@@ -37,9 +37,10 @@ class PhoneVerificationViewModel(
     }
 
     fun requestOrSubmitCode(): Completable {
-        return if (currentMode.value == WAITING_CODE) {
+        return if (currentMode.value == WAITING_CODE  ) {
             verifyCode()
-        } else {
+        }
+        else {
             requestCode()
         }
     }
@@ -48,6 +49,7 @@ class PhoneVerificationViewModel(
         return phoneRepository.submitCode(code.value!!).doOnSuccess {
             currentMode.value = it
             isVerified.value = it == VERIFIED
+            code.value = "";
         }.ignoreElement()
     }
 

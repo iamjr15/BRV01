@@ -12,6 +12,7 @@ import com.riteshakya.businesslogic.repository.auth.PhoneRepository.Companion.VE
 import com.riteshakya.businesslogic.repository.auth.PhoneRepository.Companion.WAITING_CODE
 import com.riteshakya.core.platform.BaseFragment
 import com.riteshakya.student.R
+import com.riteshakya.student.StudentApp
 import com.riteshakya.student.feature.login.navigation.LoginNavigator
 import com.riteshakya.student.feature.login.vm.PhoneVerificationViewModel
 import com.riteshakya.student.feature.login.vm.SignUpViewModel
@@ -38,12 +39,19 @@ class PhoneFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set phone number value from sign up model
+        phoneViewModel.phoneNo.value = signUpViewModel.phoneNo.value
+
         initializeButtonClickListeners()
         initializeValidators()
         initializeModeChanges()
         initializeInputsFromVM()
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        StudentApp.instance?.mustDie(this)
+    }
     private fun initializeButtonClickListeners() {
         nextBtn.setOnClickListener {
             navigateToProfilePicture()
@@ -56,6 +64,7 @@ class PhoneFragment : BaseFragment() {
                     .untilStop()
         }
         resendBtn.setOnClickListener {
+            phoneViewModel.phoneRepository.smsToken = ""
             phoneViewModel.resendCode()
                     .addLoading()
                     .subscribe({}, {})
@@ -70,14 +79,24 @@ class PhoneFragment : BaseFragment() {
                     getCodeBtn.isEnabled = true
                     getCodeBtn.text = getString(R.string.txt_send_code)
                     waitingGroup.visibility = GONE
+                    phoneViewModel.phoneRepository.smsToken = ""
                 }
                 WAITING_CODE -> {
                     verificationCodeView.performClick()
-                    getCodeBtn.isEnabled = false
+                    if(phoneViewModel.phoneRepository.smsToken!=""){
+                        verificationCodeView.text = phoneViewModel.phoneRepository.smsToken
+                        getCodeBtn.isEnabled = true
+                    }
+                    else{
+                        phoneViewModel.code.value =""
+                        verificationCodeView.text =""
+                        getCodeBtn.isEnabled = false
+                    }
                     getCodeBtn.text = getString(R.string.txt_verify_code)
                     waitingGroup.visibility = VISIBLE
                 }
                 VERIFIED -> {
+                    phoneViewModel.phoneRepository.smsToken = ""
                     getCodeBtn.isEnabled = true
                     getCodeBtn.text = getString(R.string.txt_send_code)
                     waitingGroup.visibility = GONE
@@ -86,6 +105,7 @@ class PhoneFragment : BaseFragment() {
                     getCodeBtn.isEnabled = false
                     waitingGroup.visibility = GONE
                 }
+
             }
         })
     }
@@ -93,7 +113,6 @@ class PhoneFragment : BaseFragment() {
     private fun initializeValidators() {
         addValidationList(phoneSelector.addValidity {
             phoneViewModel.phoneNo.value = it
-            signUpViewModel.phoneNo.value = it
             phoneViewModel.isVerified.value = false
             phoneViewModel.code.value = ""
         }.doOnNext {
@@ -108,7 +127,7 @@ class PhoneFragment : BaseFragment() {
     }
 
     private fun initializeInputsFromVM() {
-        phoneSelector.setValue(signUpViewModel.phoneNo.value)
+        phoneSelector.setValue(phoneViewModel.phoneNo.value)
     }
 
     override fun setValidity(result: Boolean) {
@@ -116,6 +135,9 @@ class PhoneFragment : BaseFragment() {
     }
 
     private fun navigateToProfilePicture() {
+        // Update sign up model phone number
+        signUpViewModel.phoneNo.value = phoneViewModel.phoneNo.value
+
         navigator.navigateToProfilePicture(this)
     }
 }

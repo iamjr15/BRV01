@@ -6,6 +6,7 @@ class DatabaseName {
         const val TABLE_SCHOOLS = "schools"
         const val TABLE_TEACHERS = "teachers"
         const val TABLE_STUDENTS = "students"
+        const val TABLE_PARENT = "parent"
         const val TABLE_USERS = "users"
 
         // Storage

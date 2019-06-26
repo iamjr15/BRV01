@@ -4,11 +4,12 @@ import androidx.annotation.IntDef
 import io.reactivex.Single
 
 interface PhoneRepository {
+    var smsToken: String
+
     fun requestCode(phoneNumber: String): Single<Int>
     fun submitCode(code: String): Single<Int>
 
     companion object {
-
         @IntDef(NONE, PHONE, WAITING_CODE, VERIFIED)
         annotation class Mode
 

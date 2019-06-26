@@ -1,8 +1,10 @@
 package com.riteshakya.businesslogic.data.datasource.student.repository
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.riteshakya.businesslogic.data.datasource.student.model.StudentDto
 import com.riteshakya.businesslogic.data.datasource.student.model.transform
+import com.riteshakya.businesslogic.data.model.transform
 import com.riteshakya.businesslogic.repository.auth.AuthRepository
 import com.riteshakya.businesslogic.repository.image.ImageRepository
 import com.riteshakya.businesslogic.repository.student.StudentRepository
@@ -17,33 +19,39 @@ import javax.inject.Singleton
 @Singleton
 class FirestoreStudentRepository
 @Inject constructor(
-        private val authRepository: AuthRepository,
-        private val userRepository: UserRepository,
-        private val imageRepository: ImageRepository
+    private val authRepository: AuthRepository,
+    private val userRepository: UserRepository,
+    private val imageRepository: ImageRepository
 
 ) : StudentRepository {
 
     private val studentsCollection by lazy {
-        FirebaseFirestore.getInstance().collection(
-                DatabaseName.TABLE_STUDENTS
-        )
+        FirebaseFirestore.getInstance().collection(DatabaseName.TABLE_STUDENTS)
+    }
+
+    private val parentsCollection by lazy {
+        FirebaseFirestore.getInstance().collection(DatabaseName.TABLE_PARENT)
     }
 
     override fun createStudent(student: StudentModel): Completable {
         val document = studentsCollection.document()
+        val parentDocument = parentsCollection.document()
+
         return authRepository.createAuth(
-                student.phoneNo.fullNumber, student.school, student.password
-        )
-                .flatMapCompletable { userId ->
-                    uploadImage(student, userId)
-                            .flatMapCompletable { studentDto ->
-                                userRepository.createUser(userId, studentDto)
-                                        .andThen {
-                                            document.set(studentDto.transform(userId, document.id))
-                                            it.onComplete()
-                                        }
-                            }
+            student.phoneNo.fullNumber, student.school, student.password
+        ).flatMapCompletable { userId ->
+            student.parent.parentId = parentDocument.id
+            parentDocument.set(student.parent.transform())
+
+            uploadImage(student, userId)
+                .flatMapCompletable { studentDto ->
+                    userRepository.createUser(userId, studentDto)
+                        .andThen {
+                            document.set(studentDto.transform(userId, document.id))
+                            it.onComplete()
+                        }
                 }
+        }
     }
 
     private fun uploadImage(student: StudentModel, userId: String): Single<StudentDto> {

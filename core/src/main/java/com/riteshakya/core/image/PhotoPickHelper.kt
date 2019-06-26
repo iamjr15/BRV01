@@ -12,9 +12,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.riteshakya.core.R
-import com.yalantis.ucrop.UCrop
-import com.yalantis.ucrop.UCropActivity
+import com.soundcloud.android.crop.Crop
+//import com.yalantis.ucrop.UCrop
+//import com.yalantis.ucrop.UCropActivity
+
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
@@ -130,7 +131,7 @@ class PhotoPickHelper
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+        if (requestCode == Crop.REQUEST_CROP && resultCode == RESULT_OK) {
             handleCropResult(data!!)
         } else if (requestCode == REQUEST_PICK_IMAGE) {
             data ?: return
@@ -144,7 +145,7 @@ class PhotoPickHelper
     }
 
     private fun handleCropResult(result: Intent) {
-        val resultUri = UCrop.getOutput(result)!!.path
+        val resultUri = Crop.getOutput(result)!!.path
         if (resultUri != null) {
             photoPickCallback.setUpImage(resultUri)
         }
@@ -153,27 +154,26 @@ class PhotoPickHelper
     private fun checkImage(currentPhotoPath: String) {
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
         val destinationFileName = "PNG_" + timeStamp + "_" + ".png"
-        val options = UCrop.Options()
-        options.setCircleDimmedLayer(true)
-        options.setDimmedLayerColor(
-            ContextCompat.getColor(context, R.color.colorLighterGreyOverlay)
-        )
-        options.setToolbarColor(ContextCompat.getColor(context, R.color.colorTransparent))
-        options.setStatusBarColor(ContextCompat.getColor(context, R.color.colorTransparent))
-        options.setActiveWidgetColor(
-            ContextCompat.getColor(context, R.color.colorBlack)
-        )
-        options.setToolbarWidgetColor(
-            ContextCompat.getColor(context, R.color.colorTextLight)
-        )
-        options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL)
-        UCrop.of(
+//        val options = Crop.Options()
+//        options.setCircleDimmedLayer(true)
+//        options.setDimmedLayerColor(
+//            ContextCompat.getColor(context, R.color.colorLighterGreyOverlay)
+//        )
+//        options.setToolbarColor(ContextCompat.getColor(context, R.color.colorTransparent))
+//        options.setStatusBarColor(ContextCompat.getColor(context, R.color.colorTransparent))
+//        options.setActiveWidgetColor(
+//            ContextCompat.getColor(context, R.color.colorBlack)
+//        )
+//        options.setToolbarWidgetColor(
+//            ContextCompat.getColor(context, R.color.colorTextLight)
+//        )
+//        options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL)
+        Crop.of(
             Uri.fromFile(File(currentPhotoPath)),
             Uri.fromFile(File(context.cacheDir, destinationFileName))
         )
-            .withMaxResultSize(300, 300)
-            .withAspectRatio(1f, 1f)
-            .withOptions(options)
+//            .withAspectRatio(1f, 1f)
+//            .withOptions(options)
             .start(context, fragment!!)
 
     }

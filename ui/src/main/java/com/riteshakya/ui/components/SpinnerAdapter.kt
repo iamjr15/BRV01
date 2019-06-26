@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.riteshakya.ui.R
 import com.riteshakya.ui.imageloaders.GlideLoader
 import kotlinx.android.synthetic.main.custom_spinner_items_drop_down.view.*
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.custom_spinner_items_drop_down.view.*
  */
 
 class SpinnerAdapter(
-        applicationContext: Context
+    applicationContext: Context
 ) : ArrayAdapter<SpinnerAdapter.SpinnerModel>(applicationContext, R.layout.custom_spinner_items) {
     private val inflater: LayoutInflater = LayoutInflater.from(applicationContext)
     internal val items: ArrayList<SpinnerModel> = ArrayList()
@@ -60,7 +61,16 @@ class SpinnerAdapter(
             holder = output.tag as DropDownViewHolder
         }
         holder.names.text = getItem(position).text
-        glideLoader.loadImage(getItem(position).icon, holder.icon)
+        if (getItem(position).icon.isNotBlank()) {
+            glideLoader.loadImage(getItem(position).icon, holder.icon)
+            holder.icon.visibility = View.VISIBLE
+        } else {
+            if (getItem(position).value == "-1") // Select School
+                holder.icon.visibility = View.INVISIBLE
+            else
+                holder.icon.visibility = View.GONE
+        }
+
         return output
     }
 
@@ -76,6 +86,20 @@ class SpinnerAdapter(
         }
         holder.names.text = getItem(position).text
         holder.names.setTextAppearance(context, selectedTextAppearance)
+        if (getItem(position).icon.isNotBlank()) {
+            glideLoader.loadImage(getItem(position).icon, holder.icon)
+            holder.icon.visibility = View.VISIBLE
+        } else {
+            holder.icon.visibility = View.GONE
+        }
+
+        // Change text color for "Select School"
+        if (holder.names.text == context.getString(R.string.txt_select_school)) {
+            holder.names.setTextColor(ContextCompat.getColor(context, R.color.colorTextLight))
+        } else {
+            holder.names.setTextColor(ContextCompat.getColor(context, R.color.colorTextDark))
+        }
+
         return output
     }
 
@@ -84,6 +108,7 @@ class SpinnerAdapter(
     }
 
     internal class ViewHolder(view: View) {
+        var icon: ImageView = view.imageView
         var names: TextView = view.textView
     }
 

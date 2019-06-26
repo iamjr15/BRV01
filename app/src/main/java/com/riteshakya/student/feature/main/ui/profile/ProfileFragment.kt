@@ -14,8 +14,8 @@ import javax.inject.Inject
 class ProfileFragment : BaseFragment() {
     @Inject
     internal lateinit var profileViewModel: ProfileViewModel
-    @Inject
-    internal lateinit var mainNavigator: Navigator
+//    @Inject
+//    internal lateinit var mainNavigator: Navigator
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -35,7 +35,7 @@ class ProfileFragment : BaseFragment() {
         profileViewModel.logout()
                 .addLoading()
                 .subscribe {
-                    mainNavigator.showMain(context!!)
+//                    mainNavigator.showMain(context!!)
                     activity?.finishAffinity()
                 }.untilStop()
     }

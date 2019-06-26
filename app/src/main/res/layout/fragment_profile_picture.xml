@@ -4,26 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/iconView"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="@dimen/vertical_padding_medium"
+        android:src="@drawable/ic_login_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/titleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/horizontal_padding"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="@dimen/horizontal_padding_medium"
         android:text="Signup."
         android:textAppearance="@style/TextAppearance.SignUp.Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/iconView" />
 
     <TextView
         android:id="@+id/subtitleTxt"
         style="@style/Widget.Form.Input"
-        android:layout_marginStart="@dimen/horizontal_padding_large"
-        android:layout_marginTop="@dimen/vertical_padding_medium"
+        android:layout_marginTop="@dimen/vertical_padding"
         android:text="Great. we are almost done, now just upload your photo."
         android:textAppearance="@style/TextAppearance.Footer"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTxt" />
 
@@ -57,11 +66,11 @@
     <Button
         android:id="@+id/finishBtn"
         style="@style/Widget.Button"
+        android:layout_marginBottom="@dimen/vertical_padding"
         android:enabled="false"
         android:text="Finish"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

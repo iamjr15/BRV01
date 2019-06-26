@@ -12,6 +12,7 @@ data class StudentDto(
         var gender: String = MALE,
         var class_name: String = "",
         var section: String = "",
+        var parent_id: String = "",
         var phone_no: PhoneDto = PhoneDto(),
         var profile_picture: String = ""
 ) : BaseUserDto(STUDENT)

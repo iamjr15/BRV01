@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/nextBtn"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iconView"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="@dimen/vertical_padding_medium"
+                android:src="@drawable/ic_login_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/titleTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_padding_medium"
+                android:text="Signup."
+                android:textAppearance="@style/TextAppearance.SignUp.Title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iconView" />
+
+            <TextView
+                android:id="@+id/RoleTypeTxt"
+                style="@style/Widget.Form.Input.Role.Type"
+                android:text="@string/txt_teacher_sign_up_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
+
+            <com.riteshakya.ui.components.TextInput
+                android:id="@+id/firstNameTxt"
+                style="@style/Widget.Form.Input"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="36dp"
+                android:hint="@string/txt_first_name"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/RoleTypeTxt" />
+
+            <com.riteshakya.ui.components.TextInput
+                android:id="@+id/lastNameTxt"
+                style="@style/Widget.Form.Input"
+                android:layout_marginStart="36dp"
+                android:layout_marginEnd="36dp"
+                android:hint="@string/txt_last_name"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/firstNameTxt" />
+
+            <com.riteshakya.ui.components.SelectInput
+                android:id="@+id/schoolSelect"
+                style="@style/Widget.Form.Input"
+                android:layout_marginStart="36dp"
+                android:layout_marginEnd="36dp"
+                android:hint="@string/txt_select_school"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lastNameTxt" />
+
+            <com.riteshakya.ui.components.TextInput
+                android:id="@+id/subjectTxt"
+                style="@style/Widget.Form.Input"
+                android:layout_marginStart="36dp"
+                android:layout_marginEnd="36dp"
+                android:hint="@string/txt_subject_taught"
+                android:imeOptions="actionNext"
+                android:inputType="textCapWords"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/schoolSelect" />
+
+            <com.riteshakya.ui.components.TextInput
+                android:id="@+id/passwordTxt"
+                style="@style/Widget.Form.Input"
+                android:layout_marginStart="36dp"
+                android:layout_marginEnd="36dp"
+                android:hint="@string/txt_set_password"
+                android:imeOptions="actionNext"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/subjectTxt"
+                app:password="true" />
+
+            <com.riteshakya.ui.components.DoubleSidedSwitch
+                android:id="@+id/teacherSwitch"
+                style="@style/Widget.Form.Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="@dimen/vertical_padding_medium"
+                android:layout_marginEnd="@dimen/horizontal_padding"
+                android:text="@string/txt_are_you_a_class_teacher"
+                android:textOff="@string/txt_no"
+                android:textOn="@string/txt_yes"
+                app:layout_constraintTop_toBottomOf="@id/passwordTxt" />
+
+            <TextView
+                android:id="@+id/schoolNotListedTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="@dimen/vertical_padding"
+                android:text="@string/txt_school_not_listed"
+                android:textAppearance="@style/TextAppearance.Footer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/teacherSwitch" />
+
+            <TextView
+                android:id="@+id/addHereTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/horizontal_padding_small"
+                android:layout_marginTop="@dimen/vertical_padding"
+                android:layout_marginBottom="@dimen/vertical_padding"
+                android:text="@string/txt_add_here"
+                android:textAppearance="@style/TextAppearance.OnBoarding.Text"
+                android:textColor="#4247de"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/schoolNotListedTxt"
+                app:layout_constraintTop_toBottomOf="@id/teacherSwitch" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/nextBtn"
+        style="@style/Widget.Button"
+        android:enabled="false"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

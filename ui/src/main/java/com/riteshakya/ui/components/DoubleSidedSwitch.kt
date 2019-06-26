@@ -11,9 +11,9 @@ import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.custom_double_sided_switch.view.*
 
 class DoubleSidedSwitch @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr), Checkable {
 
     private var publishValidity = PublishSubject.create<Boolean>().also {
@@ -30,13 +30,13 @@ class DoubleSidedSwitch @JvmOverloads constructor(
 
     private var textOn: String = ""
         set(value) {
-            rightTxt.text = value
+            onTxt.text = value
             field = value
         }
 
     private var textOff: String = ""
         set(value) {
-            leftTxt.text = value
+            offTxt.text = value
             field = value
         }
 

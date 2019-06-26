@@ -22,12 +22,6 @@ class PhoneInput @JvmOverloads constructor(
         defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var hint: String = ""
-        set(value) {
-            hintTxt.text = value
-            field = value
-        }
-
     var status: Status = Status.NONE
         set(state) {
             inputStatus.displayedChild = state.value
@@ -45,7 +39,6 @@ class PhoneInput @JvmOverloads constructor(
 
     private fun initTypedArray(attrs: AttributeSet?) {
         val ta = context.theme.obtainStyledAttributes(attrs, R.styleable.PhoneInput, 0, 0)
-        hint = ta.getString(R.styleable.PhoneInput_android_hint) ?: ""
         status = Status.fromId(
                 ta.getInt(R.styleable.PhoneInput_status, Status.NONE.value)
         )
