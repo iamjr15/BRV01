@@ -50,4 +50,15 @@
         <attr name="android:text" format="string" />
         <attr name="android:src" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="RoundedButton">
+        <attr name="android:text" format="string" />
+        <attr name="android:src" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ReportHeaderView">
+        <attr name="android:text" format="string" />
+        <attr name="android:src" format="reference" />
+        <attr name="android:textSize" format="dimension" />
+    </declare-styleable>
 </resources>

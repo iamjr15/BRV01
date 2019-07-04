@@ -12,6 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".feature.report.teacher_school.ComplaintReportHomeActivity">
+
+        </activity>
+        <activity android:name=".feature.report.student_parent.ReportComplaintHomeActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -26,26 +36,20 @@
         <activity
             android:name=".feature.login.ui.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-
         <activity
-            android:theme="@style/FullScreenTheme"
-            android:name=".feature.main.ui.MainActivity">
-
-        </activity>
+            android:name=".feature.main.ui.MainActivity"
+            android:theme="@style/FullScreenTheme" />
         <activity android:name=".navigation.RouteActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <!--<activity-->
-            <!--android:name="com.yalantis.ucrop.UCropActivity"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar" />-->
-
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity> <!-- <activity -->
+        <!-- android:name="com.yalantis.ucrop.UCropActivity" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> -->
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-
     </application>
 
 </manifest>
