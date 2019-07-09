@@ -1,1 +1,1 @@
-include ':app', ':core', ':ui', ':businesslogic'
+include ':app', ':core', ':ui', ':businesslogic', ':videocompressor'

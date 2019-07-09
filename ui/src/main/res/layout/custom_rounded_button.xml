@@ -6,9 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_rounded_button"
     android:id="@+id/roundedButton"
-    android:clickable="true"
-    android:padding="5dp"
-    android:focusable="true">
+    >
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -18,23 +16,12 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".0" />
 
-
-    <!--<TextView-->
-        <!--android:id="@+id/textTxt"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:gravity="start"-->
-        <!--android:textAppearance="@style/TextAppearance.Report.RoundedButton"-->
-        <!--android:textColor="#000"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--tools:text="@tools:sample/lorem" />-->
-
-
     <TextView
         android:id="@+id/textTxt"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
+        android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.Report.RoundedButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

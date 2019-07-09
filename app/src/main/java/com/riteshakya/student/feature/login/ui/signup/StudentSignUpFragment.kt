@@ -1,7 +1,6 @@
 package com.riteshakya.student.feature.login.ui.signup
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -171,12 +170,12 @@ class StudentSignUpFragment : BaseFragment() {
         }
     }
 
+    override fun setValidity(result: Boolean) {
+        nextBtn.isEnabled = result
+    }
+
     private fun navigateToPhone() {
         signUpViewModel.userRole = STUDENT
         navigator.navigateToPhone(this)
-    }
-
-    override fun setValidity(result: Boolean) {
-        nextBtn.isEnabled = result
     }
 }

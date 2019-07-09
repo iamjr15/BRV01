@@ -65,7 +65,6 @@
     <com.riteshakya.ui.components.MainButton
         android:id="@+id/reportBullyingBtn"
         android:layout_width="0dp"
-        android:visibility="gone"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/horizontal_padding_medium"
         android:layout_marginTop="@dimen/vertical_padding_large"
