@@ -64,18 +64,15 @@
 
     <com.riteshakya.ui.components.MainButton
         android:id="@+id/reportBullyingBtn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/horizontal_padding_medium"
-        android:layout_marginTop="@dimen/vertical_padding_large"
-        android:layout_marginEnd="@dimen/horizontal_padding_medium"
-        android:layout_marginBottom="@dimen/vertical_padding_medium"
+        android:layout_width="94dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/ic_alarm"
         android:text="report bullying."
-        app:layout_constraintBottom_toTopOf="@id/askDoubtsBtn"
-        app:layout_constraintEnd_toStartOf="@id/seePollsBtn"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomeView" />
+        app:layout_constraintTop_toBottomOf="@id/background" />
 
     <com.riteshakya.ui.components.MainButton
         android:id="@+id/seePollsBtn"

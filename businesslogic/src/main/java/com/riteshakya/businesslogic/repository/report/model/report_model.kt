@@ -1,36 +1,39 @@
 package com.riteshakya.businesslogic.repository.report.model
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.google.firebase.Timestamp
+import java.time.LocalDateTime
 
-class ReportModel (
 
-
-     var user_id: String ,
-     var school_id: String,
-     var user_class: String ,
-     var user_section: String ,
-     var report_text: String ,
-     var report_status: String ,
-     var report_media: String ,
-     var report_category: String ,
+data class ReportModel (
+     var id: String = "",
+     var user_id: String ="",
+     var school_id: String="",
+     var user_class: String ="",
+     var section: String ="",
+     var report_text: String ="",
+     var report_status: String ="",
+     var report_media: String ="",
+     var report_category: String ="",
      var name: String ="",
      var profile_picture: String ="",
-     var date: String ="",
-     var report_id: String = ""
-    )
+     var date: Timestamp = Timestamp.now()
+)
 
-
-
-
-fun ReportModel.transform() = ReportModel(
-    user_id = user_id,
-    report_category = report_category,
-    report_media = report_media,
-    report_status = report_status,
-    report_text = report_text,
-    user_class = user_class,
-    user_section = user_section,
-    school_id = school_id,
-    name = name,
-    profile_picture = profile_picture,
-    date = date
+data class ManagmentReportModel (
+     var id: String = "",
+     var user_id: String ="",
+     var school_id: String="",
+     var user_class: String ="",
+     var section: String ="",
+     var report_text: String ="",
+     var report_status: String ="",
+     var report_media: String ="",
+     var report_category: String ="",
+     var name: String ="",
+     var profile_picture: String ="",
+     var class_name: String ="",
+     var report_details: String ="",
+     var date: Timestamp = Timestamp.now()
 )

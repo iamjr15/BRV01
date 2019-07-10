@@ -16,6 +16,7 @@ import com.riteshakya.student.R
 import com.riteshakya.student.StudentApp
 import com.riteshakya.student.feature.main.vm.HomeViewModel
 import com.riteshakya.student.feature.report.student_parent.ReportComplaintHomeActivity
+import com.riteshakya.student.feature.report.teacher_school.ComplaintReportHomeActivity
 import com.riteshakya.ui.imageloaders.IImageLoader
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -79,7 +80,10 @@ class HomeFragment : BaseFragment() {
                     title = "Hey, ${user.firstName}",
                     subtitle = user.schoolModel.schoolName,
                     showBadge = true,
-                    badgeText = when (user.isTeacher){true ->"CLASS TEACHER" else ->"TEACHER"},
+                    badgeText = when (user.isTeacher) {
+                        true -> "CLASS TEACHER"
+                        else -> "TEACHER"
+                    },
                     profileImage = user.profilePicture
                 )
             }
@@ -94,36 +98,24 @@ class HomeFragment : BaseFragment() {
                 )
             }
         }
-        reportBullyingBtn.isVisible = true
         report(user)
     }
 
+
     private fun report(user: BaseUser) {
-
-        if(user.role.equals("Student")){
-
+        reportBullyingBtn.isVisible = true
+        if (user.role.equals("Student")) {
             reportBullyingBtn.setOnClickListener {
-                val intent = Intent(activity,ReportComplaintHomeActivity::class.java)
-                intent.putExtra("Username",user.role)
+                val intent = Intent(activity, ReportComplaintHomeActivity::class.java)
                 startActivity(intent)
             }
-
-        }
-
-        else{
-
+        } else {
+            reportBullyingBtn.text = "complaint reports"
             reportBullyingBtn.setOnClickListener {
-                val intent = Intent(activity,ReportComplaintHomeActivity::class.java)
-                intent.putExtra("Username",user.role)
+                val intent = Intent(activity, ComplaintReportHomeActivity::class.java)
                 startActivity(intent)
             }
-
-
         }
-
-
-
-
     }
 
     private fun showWelcome(

@@ -43,6 +43,7 @@ tools:context="com.riteshakya.student.feature.report.student_parent.Report">
     />
 
 <TextView
+    android:id="@+id/disclamair"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="122dp"
@@ -57,38 +58,52 @@ tools:context="com.riteshakya.student.feature.report.student_parent.Report">
     />
 
 
-<View
-    android:id="@+id/select_dialog_box"
-    android:layout_width="match_parent"
-    android:layout_height="38dp"
-    android:layout_marginTop="213dp"
-    android:layout_marginRight="15dp"
-    android:layout_marginLeft="15dp"
-    android:background="@drawable/background_attachment_button"
-    />
+<!--<View-->
+    <!--android:id="@+id/select_dialog_box"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="38dp"-->
+    <!--android:layout_marginTop="213dp"-->
+    <!--android:layout_marginRight="15dp"-->
+    <!--android:layout_marginLeft="15dp"-->
+    <!--android:background="@drawable/background_attachment_button"-->
+    <!--/>-->
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="220dp"
-    android:layout_marginLeft="28dp"
-    android:text="select category"
-    android:textAllCaps="true"
-    android:textColor="@color/colorBlack"
-    android:textSize="15sp"
-    android:fontFamily="@font/montserrat_semibold"/>
+<!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="220dp"-->
+    <!--android:layout_marginLeft="28dp"-->
+    <!--android:text="select category"-->
+    <!--android:textAllCaps="true"-->
+    <!--android:textColor="@color/colorBlack"-->
+    <!--android:textSize="15sp"-->
+    <!--android:fontFamily="@font/montserrat_semibold"/>-->
 
 
-<ImageView
+<!--<ImageView-->
 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
-    android:layout_marginTop="225dp"
-    android:layout_marginRight="29dp"
-    android:background="@drawable/ic_spinner_arrow">
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginTop="225dp"-->
+    <!--android:layout_marginRight="29dp"-->
+    <!--android:background="@drawable/ic_spinner_arrow">-->
 
-</ImageView>
+<!--</ImageView>-->
+
+    <com.riteshakya.ui.components.CustomSpinner
+        android:id="@+id/positionSelect"
+        android:layout_below="@id/disclamair"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        style="@style/SpinnerTheme"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_spinner_border"
+        android:entries="@array/reportCategory"
+        android:theme="@style/AppTheme.InputLayout.Text"
+        app:selectedTextAppearance="@style/TextAppearance.Spinner.Medium" />
 
 
 <TextView
@@ -96,14 +111,12 @@ tools:context="com.riteshakya.student.feature.report.student_parent.Report">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="274dp"
-
+    android:layout_marginLeft="15dp"
     android:text="DESCRIBE THE INCIDENT/MATTER "
     android:textAllCaps="true"
     android:textColor="@color/colorBlack"
     android:textSize="13sp"
-    android:layout_alignStart="@id/select_dialog_box"
-    android:fontFamily="@font/montserrat_semibold"
-    android:layout_alignLeft="@id/select_dialog_box">
+    android:fontFamily="@font/montserrat_semibold">
 
 </TextView>
 
@@ -138,9 +151,7 @@ tools:context="com.riteshakya.student.feature.report.student_parent.Report">
     android:background="@drawable/background_attachment_button"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
-    android:layout_alignStart="@id/select_dialog_box"
-    android:fontFamily="@font/montserrat_medium"
-    android:layout_alignLeft="@id/select_dialog_box">
+    android:fontFamily="@font/montserrat_medium">
 
 </TextView>
 

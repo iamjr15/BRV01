@@ -26,6 +26,7 @@
 
 
         <com.riteshakya.ui.components.RoundedButton
+            android:id="@+id/newReport"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             app:backgroundColor="#3146ae"
@@ -37,6 +38,7 @@
 
 
         <com.riteshakya.ui.components.RemainingRequestView
+            android:id="@+id/remainingRequest"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:paddingVertical="3dp"
