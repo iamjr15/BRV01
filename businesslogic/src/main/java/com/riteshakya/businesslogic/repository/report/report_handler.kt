@@ -118,7 +118,6 @@ class ReportHandler {
                 .document(currentUser).get()
                 .addOnSuccessListener{document ->
                     if (document != null) {
-                        println("user data  ${document.data}")
                         db.collection("reports")
                             .whereEqualTo("school_id",document.data?.get("school"))
                             .whereEqualTo("class_name",document.data?.get("class_name"))
@@ -126,7 +125,6 @@ class ReportHandler {
                             .whereEqualTo("section",document.data?.get("section")).get()
                             .addOnSuccessListener{ documents->
                                 for(doc in documents){
-                                    println("document data ${doc.data}")
                                     reports.add(doc.toObject(ManagmentReportModel::class.java))
                                 }
                                 emitter.onSuccess(reports)
