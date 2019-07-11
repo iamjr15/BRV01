@@ -36,7 +36,7 @@ class UnsolvedReports : Fragment() {
 
     private fun buildResolvedReports(recyclerView:RecyclerView){
 
-        report.getTeacherUnresolvedReport().observeOn(AndroidSchedulers.mainThread())
+        report.getManagementUnresolvedReport().observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
             }.doOnSuccess {
                 val adapter = ManagementViewAdapter(activity!!.baseContext, it,"teacher")

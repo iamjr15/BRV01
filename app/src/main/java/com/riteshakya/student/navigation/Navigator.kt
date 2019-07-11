@@ -6,6 +6,7 @@ import com.riteshakya.businesslogic.interactor.login.IsLoggedInInteractor
 import com.riteshakya.student.R
 import com.riteshakya.student.feature.login.ui.LoginActivity
 import com.riteshakya.student.feature.main.ui.MainActivity
+import com.riteshakya.student.feature.report.teacher_school.ReportDetailsActivity
 import com.riteshakya.ui.components.ViewPagerFragment
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -36,6 +37,11 @@ class Navigator
                 R.navigation.nav_graph_main, fragmentId
         )
     }
+
+
+
+
+
 }
 
 

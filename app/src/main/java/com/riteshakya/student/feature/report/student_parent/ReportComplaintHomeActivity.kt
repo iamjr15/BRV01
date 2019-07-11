@@ -19,7 +19,7 @@ import com.riteshakya.student.R
 import com.riteshakya.student.feature.report.di.ViewAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_report_complaint_home.*
-import kotlinx.android.synthetic.main.complaint_items.view.*
+import kotlinx.android.synthetic.main.report_card.view.*
 import java.util.*
 
 class ReportComplaintHomeActivity : AppCompatActivity() {
@@ -44,7 +44,7 @@ class ReportComplaintHomeActivity : AppCompatActivity() {
 
 
     private fun setRemainingRequest(){
-        report.reportLeft().observeOn(AndroidSchedulers.mainThread())
+        report.reportLeft(3).observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
             }.doOnSuccess {
                 remainingRequest.text = it.toString()

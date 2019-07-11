@@ -3,6 +3,7 @@
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
+    android:id="@+id/root_layout"
 android:layout_height="match_parent"
 tools:context="com.riteshakya.student.feature.report.student_parent.Report">
 
@@ -129,8 +130,10 @@ tools:context="com.riteshakya.student.feature.report.student_parent.Report">
     android:layout_above="@id/attachment"
     android:layout_marginBottom="40dp"
     android:padding="5dp"
-    android:fontFamily="@font/montserrat_regular"
+    android:textCursorDrawable="@color/colorBlack"
+    android:fontFamily="@font/montserrat_semibold"
     android:layout_marginTop="300dp"
+    android:textSize="14sp"
     android:layout_marginRight="15dp"
     android:layout_marginLeft="15dp"
     android:background="@drawable/background_attachment_button"
@@ -143,10 +146,16 @@ tools:context="com.riteshakya.student.feature.report.student_parent.Report">
     android:layout_marginBottom="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:paddingVertical="10dp"
     android:text="ADD PHOTO/VIDEO OF INCIDENT (OPTIONAL)"
     android:textAllCaps="true"
     android:textColor="@color/colorBlack"
+    android:drawableLeft="@drawable/ic_attachment_black_24dp"
+    android:drawableRight="@color/colorWhite"
+    android:drawablePadding="15dp"
+    android:paddingRight="15dp"
+    android:paddingLeft="15dp"
     android:textSize="9sp"
     android:background="@drawable/background_attachment_button"
     android:layout_marginLeft="15dp"
@@ -154,7 +163,6 @@ tools:context="com.riteshakya.student.feature.report.student_parent.Report">
     android:fontFamily="@font/montserrat_medium">
 
 </TextView>
-
 
     <Button
         android:id="@+id/report_submit_btn"

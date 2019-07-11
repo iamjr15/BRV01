@@ -32,7 +32,7 @@ class SolvedReports : Fragment() {
 
     private fun buildResolvedReports(recyclerView:RecyclerView){
 
-        report.getTeacherResolvedReport().observeOn(AndroidSchedulers.mainThread())
+        report.getManagementResolvedReport().observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
             }.doOnSuccess {
                 val adapter = ManagementViewAdapter(activity!!.baseContext, it,"teacher")
