@@ -1,11 +1,12 @@
 package com.riteshakya.student.feature.main.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
-import com.riteshakya.businesslogic.data.datasource.teacher.TeacherModule
+import androidx.core.view.isVisible
 import com.riteshakya.businesslogic.repository.school.model.SchoolModel
 import com.riteshakya.businesslogic.repository.student.model.StudentModel
 import com.riteshakya.businesslogic.repository.teacher.model.TeacherModel
@@ -14,6 +15,8 @@ import com.riteshakya.core.platform.BaseFragment
 import com.riteshakya.student.R
 import com.riteshakya.student.StudentApp
 import com.riteshakya.student.feature.main.vm.HomeViewModel
+import com.riteshakya.student.feature.report.student_parent.ReportComplaintHomeActivity
+import com.riteshakya.student.feature.report.teacher_school.ComplaintReportHomeActivity
 import com.riteshakya.ui.imageloaders.IImageLoader
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -35,12 +38,17 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        reportBullyingBtn.isVisible = false
         getCurrentUser()
     }
+
+
     override fun onDestroy() {
         super.onDestroy()
         StudentApp.instance?.mustDie(this)
     }
+
+
     private fun getCurrentUser() {
         homeViewModel.getCurrentUser()
             .observeOn(AndroidSchedulers.mainThread())
@@ -55,7 +63,6 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun handleUser(user: BaseUser) {
-
         when (user) {
             is StudentModel -> {
                 imageLoader.loadImage(user.schoolModel.schoolLogo, logoImg)
@@ -73,7 +80,10 @@ class HomeFragment : BaseFragment() {
                     title = "Hey, ${user.firstName}",
                     subtitle = user.schoolModel.schoolName,
                     showBadge = true,
-                    badgeText = when (user.isTeacher){true ->"CLASS TEACHER" else ->"TEACHER"},
+                    badgeText = when (user.isTeacher) {
+                        true -> "CLASS TEACHER"
+                        else -> "TEACHER"
+                    },
                     profileImage = user.profilePicture
                 )
             }
@@ -88,8 +98,25 @@ class HomeFragment : BaseFragment() {
                 )
             }
         }
+        report(user)
     }
 
+
+    private fun report(user: BaseUser) {
+        reportBullyingBtn.isVisible = true
+        if (user.role.equals("Student")) {
+            reportBullyingBtn.setOnClickListener {
+                val intent = Intent(activity, ReportComplaintHomeActivity::class.java)
+                startActivity(intent)
+            }
+        } else {
+            reportBullyingBtn.text = "complaint reports"
+            reportBullyingBtn.setOnClickListener {
+                val intent = Intent(activity, ComplaintReportHomeActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
 
     private fun showWelcome(
         title: String, subtitle: String, showBadge: Boolean, badgeText: String,

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+    android:id="@+id/report_layout"
+android:layout_height="match_parent"
+tools:context="com.riteshakya.student.feature.report.student_parent.Report">
+
+<TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="17dp"
+    android:layout_centerHorizontal="true"
+    android:text="report complain"
+    android:textAllCaps="true"
+    android:textColor="@color/colorBlack"
+    android:textSize="22sp"
+    android:fontFamily="@font/montserrat_bold"
+    />
+
+<View
+
+    android:layout_width="match_parent"
+    android:layout_height="37dp"
+    android:layout_marginTop="64dp"
+    android:layout_marginLeft="53dp"
+    android:layout_marginRight="53dp"
+    android:background="@drawable/background_attachment_button"
+    />
+
+<TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="70dp"
+    android:layout_centerHorizontal="true"
+    android:text="new report"
+    android:textAllCaps="true"
+    android:textColor="@color/colorBlack"
+    android:textSize="18sp"
+    android:fontFamily="@font/montserrat_semibold"
+    />
+
+<TextView
+    android:id="@+id/disclamair"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="122dp"
+    android:layout_marginRight="30dp"
+    android:layout_marginLeft="29dp"
+    android:justificationMode="inter_word"
+    android:layout_centerHorizontal="true"
+    android:text="Use this area to report any kind of abuse (verbal or physical), or any wrong doings inside campus to your school authorities."
+    android:textColor="@color/colorBlack"
+    android:fontFamily="@font/montserrat_bold"
+    android:textSize="14sp"
+    />
+
+
+<!--<View-->
+    <!--android:id="@+id/select_dialog_box"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="38dp"-->
+    <!--android:layout_marginTop="213dp"-->
+    <!--android:layout_marginRight="15dp"-->
+    <!--android:layout_marginLeft="15dp"-->
+    <!--android:background="@drawable/background_attachment_button"-->
+    <!--/>-->
+
+<!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="220dp"-->
+    <!--android:layout_marginLeft="28dp"-->
+    <!--android:text="select category"-->
+    <!--android:textAllCaps="true"-->
+    <!--android:textColor="@color/colorBlack"-->
+    <!--android:textSize="15sp"-->
+    <!--android:fontFamily="@font/montserrat_semibold"/>-->
+
+
+<!--<ImageView-->
+
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginTop="225dp"-->
+    <!--android:layout_marginRight="29dp"-->
+    <!--android:background="@drawable/ic_spinner_arrow">-->
+
+<!--</ImageView>-->
+
+    <com.riteshakya.ui.components.CustomSpinner
+        android:id="@+id/positionSelect"
+        android:layout_below="@id/disclamair"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        style="@style/SpinnerTheme"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/background_spinner_border"
+        android:entries="@array/reportCategory"
+        android:theme="@style/AppTheme.InputLayout.Text"
+        app:selectedTextAppearance="@style/TextAppearance.Spinner.Medium" />
+
+
+<TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="274dp"
+    android:layout_marginLeft="15dp"
+    android:text="DESCRIBE THE INCIDENT/MATTER "
+    android:textAllCaps="true"
+    android:textColor="@color/colorBlack"
+    android:textSize="13sp"
+    android:fontFamily="@font/montserrat_semibold">
+
+</TextView>
+
+
+<EditText
+    android:id="@+id/report_text"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    android:layout_above="@id/attachment"
+    android:layout_marginBottom="40dp"
+    android:padding="5dp"
+    android:textCursorDrawable="@color/colorBlack"
+    android:fontFamily="@font/montserrat_semibold"
+    android:layout_marginTop="300dp"
+    android:textSize="14sp"
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
+    android:background="@drawable/background_attachment_button"
+    />
+
+
+<TextView
+    android:id="@+id/attachment"
+    android:layout_above="@id/report_submit_btn"
+    android:layout_marginBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:paddingVertical="10dp"
+    android:text="ADD PHOTO/VIDEO OF INCIDENT (OPTIONAL)"
+    android:textAllCaps="true"
+    android:textColor="@color/colorBlack"
+    android:drawableLeft="@drawable/ic_attachment_black_24dp"
+    android:drawableRight="@drawable/ic_error"
+    android:drawablePadding="15dp"
+    android:paddingRight="15dp"
+    android:paddingLeft="15dp"
+    android:textSize="9sp"
+    android:background="@drawable/background_attachment_button"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:fontFamily="@font/montserrat_medium">
+
+</TextView>
+
+    <Button
+        android:id="@+id/report_submit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/background_contact_student"
+        android:backgroundTint="#000"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Submit"
+        android:textAllCaps="true"
+        android:textColor="@color/colorWhite"
+        android:textSize="23sp" />
+
+</RelativeLayout>

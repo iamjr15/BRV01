@@ -60,5 +60,8 @@
 
     // Form Button
     <string name="txt_login">Login</string>
+    <string name="student_details">student details</string>
+    <string name="incident_details">incident details</string>
+    <string name="incident_type">incident type:</string>
 
 </resources>

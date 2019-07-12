@@ -173,4 +173,20 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <!--Report screen appearance-->
+    <style name="TextAppearance.Report.Hero.Title" parent="TextAppearance.Montserrat.Bold">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextAppearance.Report.ReportComplaint" parent="TextAppearance.Montserrat.Bold">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextAppearance.Report.RoundedButton" parent="TextAppearance.Montserrat.Bold">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
 </resources>

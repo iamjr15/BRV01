@@ -50,4 +50,31 @@
         <attr name="android:text" format="string" />
         <attr name="android:src" format="reference" />
     </declare-styleable>
+
+    <!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+    <!--Report Styleables-->
+    <!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+    <declare-styleable name="RoundedButton">
+        <attr name="android:text" format="string" />
+        <attr name="backgroundColor" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ReportHeaderView">
+        <attr name="android:text" format="string" />
+        <attr name="android:src" format="reference" />
+        <attr name="android:textSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="RemainingRequestView">
+        <attr name="android:text" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ReportComplaintBodyHeader">
+    </declare-styleable>
+
+
+    <declare-styleable name="IncidentDetails">
+        <attr name="android:text" format="string" />
+    </declare-styleable>
+
 </resources>

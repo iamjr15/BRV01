@@ -6,4 +6,7 @@
     <external-path
         name="my_images"
         path="Android/data/com.riteshakya.student.debug/files/Pictures" />
+    <external-path path="Android/data/com.riteshakya.student.debug/" name="files_root" />
+    <external-path path="Android/data/com.riteshakya.student/" name="files_root" />
+    <external-path path="." name="external_storage_root" />
 </paths>

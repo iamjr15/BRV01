@@ -70,4 +70,6 @@ dependencies {
 
     // Image Cropper Library
     api  'com.soundcloud.android:android-crop:1.0.1@aar'
+
+
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:background="#ffe64153"
+    tools:context="com.riteshakya.student.feature.report.student_parent.ReportComplaintHomeActivity">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:orientation="vertical"
+        android:background="@drawable/background_report_header">
+
+        <com.riteshakya.ui.components.ReportHeaderView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@color/colorWhite"
+            android:text="report \ncomplaint"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="46dp"
+            tools:visibility="visible" />
+
+        <com.riteshakya.ui.components.RoundedButton
+            android:id="@+id/newReport"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            app:backgroundColor="#3146ae"
+            android:text="new report"
+            android:layout_marginRight="63dp"
+            android:layout_marginLeft="63dp"
+            android:layout_marginTop="46dp"
+            tools:visibility="visible" />
+
+
+        <com.riteshakya.ui.components.RemainingRequestView
+            android:id="@+id/remainingRequest"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingVertical="3dp"
+            android:layout_marginRight="74dp"
+            android:layout_marginLeft="74dp"
+            android:layout_marginTop="11dp"
+            android:text="3"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/report_body_shape"
+        android:orientation="vertical">
+
+        <com.riteshakya.ui.components.ReportComplaintBodyHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_recycler_view"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/report_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

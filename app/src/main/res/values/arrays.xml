@@ -53,4 +53,14 @@
         <item>Managing Director</item>
         <item>Supervisor</item>
     </string-array>
+
+    <string-array name="reportCategory">
+        <item>SELECT CATEGORY</item>
+        <item>BULLYING</item>
+        <item>THREATENING</item>
+        <item>HARASSMENT</item>
+        <item>ORAL/PHYSICAL ABUSE</item>
+        <item>ILLEGAL ACTIVITY</item>
+        <item>OTHER</item>
+    </string-array>
 </resources>
