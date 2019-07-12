@@ -1,6 +1,7 @@
 package com.riteshakya.businesslogic.repository.report
 
 
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,7 +24,8 @@ class ReportHandler {
                 if (document != null) {
                     data["user_id"] = currentUser
                     data["school_id"] = document.data?.get("school") as String
-                    data["name"] = document.data?.get("first_name").toString()+" " + document.data?.get("last_name").toString()
+                    data["name"] =
+                        document.data?.get("first_name").toString() + " " + document.data?.get("last_name").toString()
                     data["report_status"] = "unresolved"
                     data["class_name"] = document.data?.get("class_name") as String
                     data["section"] = document.data?.get("section") as String
@@ -54,7 +56,7 @@ class ReportHandler {
 
         return create { emitter ->
             db.collection("reports")
-                .orderBy("date",Query.Direction.DESCENDING)
+                .orderBy("date", Query.Direction.DESCENDING)
                 .whereEqualTo("user_id", currentUser)
                 .get()
                 .addOnSuccessListener { documents ->
@@ -71,10 +73,15 @@ class ReportHandler {
         }
     }
 
+    fun getManagementUnresolvedReport(
+        startAfter: Timestamp,
+        limit: Int
+    ): Single<ArrayList<ManagementReportModel>> {
 
-    fun getManagementResolvedReport(): Single<ArrayList<ManagementReportModel>> {
-        val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
-        val db = FirebaseFirestore.getInstance()
+        var teacher: Query
+
+        var currentUser = FirebaseAuth.getInstance().currentUser!!.uid
+        var db = FirebaseFirestore.getInstance()
         val reports: ArrayList<ManagementReportModel> = ArrayList()
 
         return create { emitter ->
@@ -82,66 +89,34 @@ class ReportHandler {
                 .document(currentUser).get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
-                        val teacher = db.collection("reports")
-                            .orderBy("date", Query.Direction.DESCENDING)
-                            .whereEqualTo("school_id", document.data?.get("school"))
-                            .whereEqualTo("class_name", document.data?.get("class_name"))
-                            .whereEqualTo("report_status", "resolved")
-                            .whereEqualTo("section", document.data?.get("section"))
 
+                        if (startAfter == Timestamp(Date(1, 1, 1))) {
 
-                        val school = db.collection("reports")
+                            teacher = db.collection("reports")
+                                .orderBy("date", Query.Direction.DESCENDING)
+                                .whereEqualTo("school_id", document.data?.get("school"))
+                                .whereEqualTo("class_name", document.data?.get("class_name"))
+                                .whereEqualTo("report_status", "unresolved")
+                                .whereEqualTo("section", document.data?.get("section"))
+                                .limit(limit.toLong())
+                        } else {
+                            teacher = db.collection("reports")
+                                .orderBy("date")
+                                .whereEqualTo("school_id", document.data?.get("school"))
+                                .whereEqualTo("class_name", document.data?.get("class_name"))
+                                .whereEqualTo("report_status", "unresolved")
+                                .whereEqualTo("section", document.data?.get("section"))
+                                .startAfter(startAfter)
+                                .limit(limit.toLong())
+                        }
+
+                        var school = db.collection("reports")
                             .whereEqualTo("school_id", document.data?.get("school"))
-                            .whereEqualTo("report_status", "resolved")
+                            .whereEqualTo("report_status", "unresolved")
                             .orderBy("date")
 
-                        val query =
+                        var query =
                             if (document.data?.get("role").toString() == "School") school else teacher
-                        query.get()
-                            .addOnSuccessListener { documents ->
-                                for (document in documents) {
-                                    reports.add(document.toObject(ManagementReportModel::class.java).also {
-                                        it.id = document.id
-                                    })
-                                }
-                                emitter.onSuccess(reports)
-                            }
-                            .addOnFailureListener { e ->
-                               emitter.onError(e)
-                            }
-                    }
-                }
-                .addOnFailureListener { e ->
-                    emitter.onError(e)
-                }
-        }
-    }
-
-    fun getManagementUnresolvedReport(): Single<ArrayList<ManagementReportModel>> {
-        val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
-        val db = FirebaseFirestore.getInstance()
-        val reports: ArrayList<ManagementReportModel> = ArrayList()
-
-        return create { emitter ->
-            db.collection("users")
-                .document(currentUser).get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        val teacher = db.collection("reports")
-                            .orderBy("date",Query.Direction.DESCENDING)
-                            .whereEqualTo("school_id", document.data?.get("school"))
-                            .whereEqualTo("class_name", document.data?.get("class_name"))
-                            .whereEqualTo("report_status", "unresolved")
-                            .whereEqualTo("section", document.data?.get("section"))
-
-                        val school = db.collection("reports")
-                            .orderBy("date",Query.Direction.DESCENDING)
-                            .whereEqualTo("school_id", document.data?.get("school"))
-                            .whereEqualTo("report_status", "unresolved")
-
-
-                        val query =
-                            if (document.data?.get("role").toString().equals("School")) school else teacher
 
                         query.get()
                             .addOnSuccessListener { documents ->
@@ -153,7 +128,65 @@ class ReportHandler {
                                 emitter.onSuccess(reports)
                             }
                             .addOnFailureListener { e ->
-                               emitter.onError(e)
+                                emitter.onError(e)
+                            }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    emitter.onError(e)
+                }
+        }
+    }
+
+    fun getManagementResolvedReport(
+        startAfter: Timestamp,
+        limit: Int
+    ): Single<ArrayList<ManagementReportModel>> {
+        var teacher: Query
+        var currentUser = FirebaseAuth.getInstance().currentUser!!.uid
+        var db = FirebaseFirestore.getInstance()
+        val reports: ArrayList<ManagementReportModel> = ArrayList()
+
+        return create { emitter ->
+            db.collection("users")
+                .document(currentUser).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        if (startAfter == Timestamp(Date(1, 1, 1))) {
+                            teacher = db.collection("reports")
+                                .orderBy("date", Query.Direction.DESCENDING)
+                                .whereEqualTo("school_id", document.data?.get("school"))
+                                .whereEqualTo("class_name", document.data?.get("class_name"))
+                                .whereEqualTo("report_status", "resolved")
+                                .whereEqualTo("section", document.data?.get("section"))
+                                .limit(limit.toLong())
+                        } else {
+                            teacher = db.collection("reports")
+                                .orderBy("date")
+                                .whereEqualTo("school_id", document.data?.get("school"))
+                                .whereEqualTo("class_name", document.data?.get("class_name"))
+                                .whereEqualTo("report_status", "resolved")
+                                .whereEqualTo("section", document.data?.get("section"))
+                                .startAfter(startAfter)
+                                .limit(limit.toLong())
+                        }
+                        var school = db.collection("reports")
+                            .whereEqualTo("school_id", document.data?.get("school"))
+                            .whereEqualTo("report_status", "resolved")
+                            .orderBy("date")
+                        var query =
+                            if (document.data?.get("role").toString().equals("School")) school else teacher
+                        query.get()
+                            .addOnSuccessListener { documents ->
+                                for (doc in documents) {
+                                    reports.add(doc.toObject(ManagementReportModel::class.java).also {
+                                        it.id = doc.id
+                                    })
+                                }
+                                emitter.onSuccess(reports)
+                            }
+                            .addOnFailureListener { e ->
+                                emitter.onError(e)
                             }
                     }
                 }
