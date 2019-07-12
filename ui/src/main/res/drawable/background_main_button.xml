@@ -17,8 +17,8 @@
                         <corners android:radius="5dp" />
                     </shape>
                 </item>
-                <item android:bottom="@dimen/vertical_padding_small"
-                    android:right="@dimen/vertical_padding_small">
+                <item android:bottom="4dp"
+                    android:right="4dp">
 
                     <shape android:shape="rectangle">
                         <stroke

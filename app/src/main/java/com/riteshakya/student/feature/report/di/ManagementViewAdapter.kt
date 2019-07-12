@@ -3,7 +3,6 @@ package com.riteshakya.student.feature.report.di
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.os.Parcelable
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
@@ -15,17 +14,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.Timestamp
 import com.riteshakya.businesslogic.repository.report.ReportHandler
-import com.riteshakya.businesslogic.repository.report.model.ManagmentReportModel
+import com.riteshakya.businesslogic.repository.report.model.ManagementReportModel
 import com.riteshakya.student.R
 import com.riteshakya.student.feature.report.teacher_school.ReportDetailsActivity
 import kotlinx.android.synthetic.main.report_card.view.*
-import java.io.Serializable
 import java.util.*
 
 
 class ManagementViewAdapter(
     val context: Context,
-    val reportList: ArrayList<ManagmentReportModel>,
+    val reportList: ArrayList<ManagementReportModel>,
     val role: String
 ) :
     RecyclerView.Adapter<ManagementViewAdapter.ViewHolder>() {
@@ -49,7 +47,11 @@ class ManagementViewAdapter(
 
             val intent = Intent(context, ReportDetailsActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.putExtra("report", reportList[position])
+            intent.putExtra("report_details", reportList[position].report_details)
+            intent.putExtra("date", dateFormat(reportList[position].date))
+            intent.putExtra("report_media", reportList[position].report_media)
+            intent.putExtra("report_category", reportList[position].report_category)
+            intent.putExtra("user_id", reportList[position].user_id)
             context.startActivity(intent)
         }
 
@@ -65,7 +67,7 @@ class ManagementViewAdapter(
 
 
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bindItems(context: Context, report: ManagmentReportModel) {
+        fun bindItems(context: Context, report: ManagementReportModel) {
 
             val reportBtn =
                 itemView.findViewById(R.id.resolve_type) as com.riteshakya.ui.components.RoundedButton
@@ -87,12 +89,15 @@ class ManagementViewAdapter(
         }
 
 
-        @RequiresApi(Build.VERSION_CODES.O)
-        fun dateFormat(date: Timestamp): String {
-            val cal = Calendar.getInstance(Locale.ENGLISH)
-            cal.timeInMillis = date.seconds * 1000
-            val date = DateFormat.format("d MMM. yyyy", cal).toString()
-            return date
-        }
+
     }
+
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun dateFormat(date: Timestamp): String {
+    val cal = Calendar.getInstance(Locale.ENGLISH)
+    cal.timeInMillis = date.seconds * 1000
+    val date = DateFormat.format("dd MMM. yyyy", cal).toString()
+    return date
 }

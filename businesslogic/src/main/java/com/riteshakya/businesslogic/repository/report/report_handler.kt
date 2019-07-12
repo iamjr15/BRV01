@@ -2,8 +2,9 @@ package com.riteshakya.businesslogic.repository.report
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.riteshakya.businesslogic.repository.report.model.ManagmentReportModel
+import com.riteshakya.businesslogic.repository.report.model.ManagementReportModel
 import com.riteshakya.businesslogic.repository.report.model.ReportModel
 import com.riteshakya.core.exception.ErrorFetching
 import io.reactivex.Single
@@ -23,7 +24,7 @@ class ReportHandler {
                     data.set("school_id", document.data?.get("school") as String)
                     data.set(
                         "name",
-                        document.data?.get("first_name").toString() + document.data?.get("last_name").toString()
+                        document.data?.get("first_name").toString()+" " + document.data?.get("last_name").toString()
                     )
                     data.set("report_status", "unresolved")
                     data.set("class_name", document.data?.get("class_name") as String)
@@ -72,10 +73,10 @@ class ReportHandler {
     }
 
 
-    fun getManagementResolvedReport(): Single<ArrayList<ManagmentReportModel>> {
+    fun getManagementResolvedReport(): Single<ArrayList<ManagementReportModel>> {
         var currentUser = FirebaseAuth.getInstance().currentUser!!.uid
         var db = FirebaseFirestore.getInstance()
-        val reports: ArrayList<ManagmentReportModel> = ArrayList()
+        val reports: ArrayList<ManagementReportModel> = ArrayList()
 
         return create { emitter ->
             db.collection("users")
@@ -99,7 +100,7 @@ class ReportHandler {
                         query.get()
                             .addOnSuccessListener { documents ->
                                 for (document in documents) {
-                                    reports.add(document.toObject(ManagmentReportModel::class.java).also {
+                                    reports.add(document.toObject(ManagementReportModel::class.java).also {
                                         it.id = document.id
                                     })
                                 }
@@ -116,10 +117,10 @@ class ReportHandler {
         }
     }
 
-    fun getManagementUnresolvedReport(): Single<ArrayList<ManagmentReportModel>> {
+    fun getManagementUnresolvedReport(): Single<ArrayList<ManagementReportModel>> {
         var currentUser = FirebaseAuth.getInstance().currentUser!!.uid
         var db = FirebaseFirestore.getInstance()
-        val reports: ArrayList<ManagmentReportModel> = ArrayList()
+        val reports: ArrayList<ManagementReportModel> = ArrayList()
 
         return create { emitter ->
             db.collection("users")
@@ -144,7 +145,7 @@ class ReportHandler {
                         query.get()
                             .addOnSuccessListener { documents ->
                                 for (doc in documents) {
-                                    reports.add(doc.toObject(ManagmentReportModel::class.java).also {
+                                    reports.add(doc.toObject(ManagementReportModel::class.java).also {
                                         it.id = doc.id
                                     })
                                 }
@@ -204,7 +205,21 @@ class ReportHandler {
                 println("Error while updating")
             }
         }
+    }
 
+
+    fun studentDetails(userId: String): Single<DocumentSnapshot> {
+        var updateReportReference =
+            FirebaseFirestore.getInstance().collection("users").document(userId)
+
+        return create { emitter ->
+            updateReportReference.get().addOnSuccessListener {
+                emitter.onSuccess(it)
+            }.addOnFailureListener {
+                emitter.onError(it)
+                println("Error while updating")
+            }
+        }
     }
 
     fun reportLeft(max: Int): Single<Int> {

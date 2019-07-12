@@ -1,226 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-android:weightSum="1"
-android:background="#fff"
-tools:context="com.riteshakya.student.feature.report.teacher_school.ReportDetailsActivity">
-
-
-<LinearLayout android:layout_width="match_parent" android:layout_height="0dp"
-    android:layout_weight="0.3"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical"
     android:weightSum="1"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp"
-    android:background="@drawable/background_report_header">
+    tools:context="com.riteshakya.student.feature.report.teacher_school.ReportDetailsActivity">
 
-
-    <com.riteshakya.ui.components.ReportHeaderView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@color/colorWhite"
-        android:text="andrew\ndemis"
-        android:layout_marginTop="46dp"
-        tools:visibility="visible" />
-
-
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="bullying"
-        android:textSize="17sp"
-        android:textAppearance="@style/TextAppearance.SignUp.SubTitle"
-        android:layout_marginTop="10dp"
-        android:textAllCaps="true"
-        android:textColor="#fff"
-        />
-
-</LinearLayout>
-
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:background="#ffe64153"
-    android:layout_weight="0.7">
-
-    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:background="@drawable/background_report_header"
         android:orientation="vertical"
-        android:background="@drawable/report_body_shape"
-        android:paddingTop="13dp"
-        android:paddingLeft="23dp"
-        android:paddingRight="23dp"
-        >
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:weightSum="1">
 
-        <!--Content start-->
-        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            >
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="student details"
+        <RelativeLayout
+            android:id="@+id/headerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="46dp">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="report\ndetails"
                 android:textAllCaps="true"
-                android:textColor="#000"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:layout_alignParentStart="true"
+                android:textAppearance="@style/TextAppearance.Report.Hero.Title" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/im_profileImage"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
-                />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="24 FEB. 2019"
-                android:textStyle="bold"
-                android:layout_alignParentEnd="true"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="12sp"
-                />
+                tools:src="@tools:sample/backgrounds/scenic" />
+
         </RelativeLayout>
 
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Class:"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="12sp"
-                android:layout_marginRight="5dp"
-                />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="5"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="12sp"
-                />
-        </LinearLayout>
-
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="section:"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="12sp"
-                android:layout_marginRight="5dp"
-                />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="c"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="12sp"
-                />
-        </LinearLayout>
-
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="contact no.:"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="12sp"
-                android:layout_marginRight="5dp"
-                />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="+1 2648856487"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="12sp"
-                />
-        </LinearLayout>
-
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="incident type:"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="12sp"
-                android:layout_marginRight="5dp"
-                />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="bullying"
-                android:textAllCaps="true"
-                android:textColor="#000"
-                android:textSize="12sp"
-                />
-        </LinearLayout>
-
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="incident details"
-            android:textAllCaps="true"
-            android:textColor="#000"
-            android:layout_marginTop="18dp"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            />
-
-        <com.riteshakya.ui.components.IncidentDetails
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="texth cdshjcvsd dsfvd dsvfykugds fdfs dhdsf dfvdjhvf dsvf dvf bdfdgsvf dvfdsvfd "
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            tools:visibility="visible" />
+            android:text=""
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.SignUp.SubTitle"
+            android:textColor="#fff"
+            android:textSize="17sp" />
 
     </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:background="#ffe64153">
 
-<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_gravity="center"
-    android:layout_marginTop="10dp"
-    >
-    <Button
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/report_body_shape"
+            android:orientation="vertical"
+            android:paddingLeft="23dp"
+            android:paddingTop="13dp"
+            android:paddingRight="23dp">
+
+            <!--Content start-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/student_details"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="Class:"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_class_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="section:"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="contact no.:"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/incident_type"
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_report_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/incident_details"
+                android:textAllCaps="true"
+                android:textColor="#000"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <com.riteshakya.ui.components.IncidentDetails
+                android:id="@+id/tv_report_details"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:text=""
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:textColor="#000"
-        android:padding="0dp"
-        android:textSize="10sp"
-        android:text="dowonload attachment"
-        android:drawableLeft="@drawable/shape_circle"
-        android:paddingLeft="10dp"
-        android:layout_marginBottom="7dp"
-        android:backgroundTint="#fff"
-        android:background="@drawable/background_contact_student"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_report_media"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/background_contact_student"
+            android:backgroundTint="#fff"
+            android:drawableLeft="@drawable/ic_attachment_black_24dp"
+            android:paddingLeft="10dp"
+            android:text="download attachment"
+            android:textColor="#000"
+            android:textSize="10sp" />
 
 
-    <Button
-        android:id="@+id/contact"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="30dp"
-        android:text="contact student"
-        android:backgroundTint="@color/colorBlack"
-        android:textColor="#FFF"
-        android:textAllCaps="true"
-        android:background="@drawable/background_contact_student"/>
+        <Button
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@drawable/background_contact_student"
+            android:backgroundTint="@color/colorBlack"
+            android:text="contact student"
+            android:textAllCaps="true"
+            android:textColor="#FFF" />
 
-    <!--<Button-->
-        <!--android:id="@+id/resendBtn"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:background=""-->
-        <!--android:layout_marginTop="@dimen/vertical_padding_medium"-->
-        <!--android:backgroundTint="@color/colorBlack"-->
-        <!--android:text="contact student"/>-->
 
-    <!--<Button-->
-        <!--android:id="@+id/contact"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="48dp"-->
-        <!--android:layout_marginHorizontal="30dp"-->
-        <!--android:text="contact student"-->
-        <!--android:textColor="#FFF"-->
-        <!--android:textAllCaps="true"-->
-        <!--android:background="@xml/button_shape"/>-->
-
-</LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

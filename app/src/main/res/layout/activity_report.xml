@@ -3,7 +3,7 @@
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
-    android:id="@+id/root_layout"
+    android:id="@+id/report_layout"
 android:layout_height="match_parent"
 tools:context="com.riteshakya.student.feature.report.student_parent.Report">
 
@@ -152,7 +152,7 @@ tools:context="com.riteshakya.student.feature.report.student_parent.Report">
     android:textAllCaps="true"
     android:textColor="@color/colorBlack"
     android:drawableLeft="@drawable/ic_attachment_black_24dp"
-    android:drawableRight="@color/colorWhite"
+    android:drawableRight="@drawable/ic_error"
     android:drawablePadding="15dp"
     android:paddingRight="15dp"
     android:paddingLeft="15dp"

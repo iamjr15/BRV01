@@ -238,4 +238,10 @@
         <item name="android:insetBottom">0dp</item>
     </style>
 
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
 </resources>

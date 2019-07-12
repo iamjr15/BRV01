@@ -18,12 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@color/colorWhite"
-            android:text="report\ncomplaint"
+            android:text="report \ncomplaint"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="46dp"
             tools:visibility="visible" />
-
 
         <com.riteshakya.ui.components.RoundedButton
             android:id="@+id/newReport"
@@ -68,8 +67,6 @@
             tools:listitem="@layout/report_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
-
 
     </LinearLayout>
 

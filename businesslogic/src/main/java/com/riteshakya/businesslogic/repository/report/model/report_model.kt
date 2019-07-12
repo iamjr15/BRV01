@@ -27,7 +27,7 @@ data class ReportModel (
 )
 
 
-data class ManagmentReportModel(
+data class ManagementReportModel(
      var id: String = "",
      var user_id: String ="",
      var school_id: String="",
