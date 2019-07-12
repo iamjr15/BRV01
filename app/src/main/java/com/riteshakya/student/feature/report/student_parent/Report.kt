@@ -37,9 +37,9 @@ class Report : AppCompatActivity() {
 
     var report: ReportHandler = ReportHandler()
     var map: HashMap<String, Any> = hashMapOf()
-    lateinit var alertDiag: AlertDialog
+    lateinit var alertDialog: AlertDialog
     private val PERMISSION_REQUEST_CODE = 200
-    var storageRef = FirebaseStorage.getInstance().getReference()
+    var storageRef = FirebaseStorage.getInstance().reference
     var file: File = File("")
     var type: String = ""
 
@@ -49,87 +49,61 @@ class Report : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.riteshakya.student.R.layout.activity_report)
-
+        setContentView(R.layout.activity_report)
 
         positionSelect.onItemChanged {
-            map.set("report_category", it)
+            map["report_category"] = it
         }
-
         attachment.setOnClickListener {
-
             requestPickMedia()
         }
-
-        println(positionSelect)
-
         report_submit_btn.setOnClickListener {
-
             if (positionSelect.selectedItemPosition == 0) {
-
-
                 Snackbar.make(
                     report_layout,
                     "Please select the report category.",
                     Snackbar.LENGTH_SHORT
                 ).show()
-
             } else if (isNullOrEmpty(report_text.text.toString())) {
-
                 Snackbar.make(
                     report_layout,
                     "Please enter the details of the report.",
                     Snackbar.LENGTH_SHORT
                 ).show()
-
-
             } else {
-                map.set("report_details", report_text.text.toString())
-
-
-                if (!file.path.equals("")) {
-
+                map["report_details"] = report_text.text.toString()
+                if (file.path != "") {
                     uploadMedia(type).doOnSuccess {
-                        map.set("report_media", it)
+                        map["report_media"] = it
                         createReport(map)
                     }.subscribe()
                 } else {
-
-                    map.set("report_media", " ")
+                    map["report_media"] = " "
                     createReport(map)
-
                 }
-
-
             }
         }
     }
 
 
-    fun createReport(data: HashMap<String, Any>) {
-
-
-        alertDiag = AlertDialog.Builder(this)
+    private fun createReport(data: HashMap<String, Any>) {
+        alertDialog = AlertDialog.Builder(this)
             .setView(R.layout.progress_view)
             .setTitle("Filing Report...")
             .setCancelable(false)
             .create()
-
-        alertDiag.show()
+        alertDialog.show()
         report.createReport(data).observeOn(AndroidSchedulers.mainThread()).doOnSubscribe {
-
         }.doOnSuccess {
-
-
-            alertDiag.cancel()
-
-
+            alertDialog.cancel()
             Snackbar.make(report_layout, "Reports Uploaded", Snackbar.LENGTH_SHORT)
             var intent = Intent(this, ReportComplaintHomeActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
-
-        }.subscribe()
+        }.doOnError {
+            Crashlytics.log("Create Report: ${it.message}")
+        }
+            .subscribe()
 
     }
 
@@ -169,116 +143,95 @@ class Report : AppCompatActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
         data ?: return
         if (resultCode == Activity.RESULT_OK) {
-            val cR = this.getContentResolver()
+            val cR = this.contentResolver
+            when {
+                cR.getType(data.data)!!.contains("image") -> {
+                    file =
+                        Compressor(this).compressToFile(File(Util.getFilePath(this, data.data)))
+                    type = ".jpeg"
+                    attachment.text = "Added Image"
+                    attachment.setCompoundDrawablesWithIntrinsicBounds(
+                        R.drawable.ic_image,
+                        0,
+                        R.drawable.ic_error,
+                        0
+                    )
+                }
+                cR.getType(data.data)!!.contains("video") -> {
+                    alertDialog = AlertDialog.Builder(this)
+                        .setView(R.layout.progress_view)
+                        .setTitle("Compressing Video...")
+                        .setCancelable(false)
+                        .create()
+                    alertDialog.show()
+                    val outputDir =
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath
+                    VideoCompress.compressVideoLow(
+                        Util.getFilePath(this, data.data),
+                        outputDir + File.separator + "compressMedia.mp4",
+                        object : VideoCompress.CompressListener {
+                            override fun onStart() {
+                            }
 
-            if (cR.getType(data.getData())!!.contains("image")) {
+                            @SuppressLint("SetTextI18n")
+                            override fun onSuccess() {
+                                attachment.text = "Added Video"
+                                attachment.setCompoundDrawablesWithIntrinsicBounds(
+                                    R.drawable.ic_video,
+                                    0,
+                                    R.drawable.ic_error,
+                                    0
+                                )
+                                alertDialog.cancel()
+                                file = File(outputDir + File.separator + "compressMedia.mp4")
+                                type = ".mp4"
+                            }
 
-                file =
-                    Compressor(this).compressToFile(File(Util.getFilePath(this, data.data)))
+                            override fun onFail() {
+                                Snackbar.make(
+                                    report_layout,
+                                    "compression failed for video",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                                Crashlytics.log(Log.ERROR, "ERROR", "compression failed for video")
+                            }
 
-                type = ".jpeg"
-                attachment.setText("Added Image")
-                attachment.setCompoundDrawablesWithIntrinsicBounds(
-                    R.drawable.ic_image,
-                    0,
-                    R.drawable.ic_error,
-                    0
-                )
+                            override fun onProgress(percent: Float) {
+                            }
+                        })
 
-
-            } else if (cR.getType(data.getData())!!.contains("video")) {
-                alertDiag = AlertDialog.Builder(this)
-                    .setView(R.layout.progress_view)
-                    .setTitle("Compressing Video...")
-                    .setCancelable(false)
-                    .create()
-                alertDiag.show()
-
-
-                val outputDir =
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                        .getAbsolutePath()
-
-                VideoCompress.compressVideoLow(
-                    Util.getFilePath(this, data.data),
-                    outputDir + File.separator + "compressMedia.mp4",
-                    object : VideoCompress.CompressListener {
-                        override fun onStart() {
-                        }
-
-                        override fun onSuccess() {
-
-                            attachment.setText("Added Video")
-                            attachment.setCompoundDrawablesWithIntrinsicBounds(
-                                R.drawable.ic_video,
-                                0,
-                                R.drawable.ic_error,
-                                0
-                            )
-
-                            alertDiag.cancel()
-
-                            file = File(outputDir + File.separator + "compressMedia.mp4")
-                            type = ".mp4"
-
-                        }
-
-                        override fun onFail() {
-
-                            Snackbar.make(
-                                report_layout,
-                                "compression failed for video",
-                                Snackbar.LENGTH_LONG
-                            ).show()
-                            Crashlytics.log(Log.ERROR, "ERROR", "compression failed for video");
-                        }
-
-                        override fun onProgress(percent: Float) {
-                        }
-                    })
-
-            } else {
-
-                alertDiag.cancel()
-                Snackbar.make(report_layout, "Unsupported Format", Snackbar.LENGTH_LONG).show()
-                Crashlytics.log(Log.ERROR, "ERROR", "Unsupported Format");
-
+                }
+                else -> {
+                    alertDialog.cancel()
+                    Snackbar.make(report_layout, "Unsupported Format", Snackbar.LENGTH_LONG).show()
+                    Crashlytics.log(Log.ERROR, "ERROR", "Unsupported Format")
+                }
             }
         }
     }
 
 
-    fun uploadMedia(s: String): Single<String> {
-
-
-        alertDiag = AlertDialog.Builder(this)
+    private fun uploadMedia(s: String): Single<String> {
+        alertDialog = AlertDialog.Builder(this)
             .setView(R.layout.progress_view)
             .setTitle("Uploading Media...")
             .setCancelable(false)
             .create()
-
-        alertDiag.show()
-
+        alertDialog.show()
         val reportRef =
             storageRef.child("report_complain_media/${currentUser}").child("${Date().time}${s}")
         return Single.create { emitter ->
             reportRef.upload(file.path).doOnSuccess {
-                alertDiag.cancel()
+                alertDialog.cancel()
                 emitter.onSuccess(
                     it
                 )
             }.doOnError {
-
                 Crashlytics.log("UPLOAD ERROR: ${it.message}")
-                alertDiag.cancel()
-            }
-
-                .subscribe()
-
-
+                alertDialog.cancel()
+            }.subscribe()
         }
     }
 
@@ -289,11 +242,8 @@ class Report : AppCompatActivity() {
         grantResults: IntArray
     ) {
         when (requestCode) {
-            PERMISSION_REQUEST_CODE -> if (grantResults.size > 0) {
-
+            PERMISSION_REQUEST_CODE -> if (grantResults.isNotEmpty()) {
                 val writeStorage = grantResults[0] == PackageManager.PERMISSION_GRANTED
-
-
                 if (writeStorage) {
                     Snackbar.make(
                         report_layout,
@@ -301,14 +251,11 @@ class Report : AppCompatActivity() {
                         Snackbar.LENGTH_LONG
                     ).show()
                 } else {
-
                     Snackbar.make(
                         report_layout,
                         "Permission Denied.",
                         Snackbar.LENGTH_LONG
                     ).show()
-
-
                 }
             }
         }

@@ -14,7 +14,6 @@ class ComplaintReportHomeActivity : AppCompatActivity() {
         val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
         viewpager_main.adapter = fragmentAdapter
 
-
         tabs_main.setupWithViewPager(viewpager_main)
     }
 }

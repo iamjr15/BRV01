@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.crashlytics.android.Crashlytics
 import com.riteshakya.businesslogic.repository.report.ReportHandler
 import com.riteshakya.businesslogic.repository.report.model.ReportModel
 import com.riteshakya.student.R
@@ -49,13 +50,14 @@ class ReportComplaintHomeActivity : AppCompatActivity() {
             }.doOnSuccess {
                 remainingRequest.text = it.toString()
                 createNewReport(it != 0)
+            }.doOnError {
+                Crashlytics.log("Remain Request Error: ${it.message}")
             }
             .subscribe()
     }
 
 
     private fun createNewReport(canCreate: Boolean){
-
         newReport.setOnClickListener{
             if(canCreate){
                 val intent = Intent(this, Report::class.java)
@@ -73,6 +75,8 @@ class ReportComplaintHomeActivity : AppCompatActivity() {
             }.doOnSuccess {
                 val adapter = ViewAdapter(this, it,"student")
                 recyclerView.adapter = adapter
+            }.doOnError {
+                Crashlytics.log("My Reports: ${it.message}")
             }
             .subscribe()
     }

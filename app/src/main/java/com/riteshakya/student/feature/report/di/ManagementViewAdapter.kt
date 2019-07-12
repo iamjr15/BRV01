@@ -1,5 +1,6 @@
 package com.riteshakya.student.feature.report.di
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -66,6 +67,7 @@ class ManagementViewAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
+        @SuppressLint("SetTextI18n")
         @RequiresApi(Build.VERSION_CODES.O)
         fun bindItems(context: Context, report: ManagementReportModel) {
 
