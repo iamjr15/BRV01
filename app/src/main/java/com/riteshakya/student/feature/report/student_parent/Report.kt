@@ -86,6 +86,7 @@ class Report : AppCompatActivity() {
     }
 
 
+    //function for filing report online
     private fun createReport(data: HashMap<String, Any>) {
         alertDialog = AlertDialog.Builder(this)
             .setView(R.layout.progress_view)
@@ -108,6 +109,7 @@ class Report : AppCompatActivity() {
     }
 
 
+    //fucntion to check permissions
     private fun checkPermission(): Boolean {
         val result = ContextCompat.checkSelfPermission(applicationContext, WRITE_EXTERNAL_STORAGE)
         val result1 = ContextCompat.checkSelfPermission(applicationContext, READ_EXTERNAL_STORAGE)
@@ -125,6 +127,8 @@ class Report : AppCompatActivity() {
 
     }
 
+
+    //function for getting media from gallery
     fun requestPickMedia() {
 
         if (checkPermission()) {
@@ -213,6 +217,7 @@ class Report : AppCompatActivity() {
     }
 
 
+    //function for uploading
     private fun uploadMedia(s: String): Single<String> {
         alertDialog = AlertDialog.Builder(this)
             .setView(R.layout.progress_view)

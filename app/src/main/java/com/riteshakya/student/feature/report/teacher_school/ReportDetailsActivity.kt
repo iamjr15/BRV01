@@ -80,7 +80,7 @@ class ReportDetailsActivity : AppCompatActivity() {
                 tv_report_details.text = reportDetails
                 btn_report_media.setOnClickListener {
                     if (checkPermission()) {
-                        println("Is file exist ------------------------------------------- ${isFileExist()}")
+
                         if (isFileExist()) {
                             openFile()
                         } else {
@@ -98,6 +98,7 @@ class ReportDetailsActivity : AppCompatActivity() {
     }
 
 
+    //function to check if media file exits locally
     private fun isFileExist(): Boolean {
         val directory =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
@@ -109,6 +110,8 @@ class ReportDetailsActivity : AppCompatActivity() {
         return File(reportMediaPath).exists()
     }
 
+
+    //function to view downloaded media
     private fun openFile() {
         val intent = Intent(Intent.ACTION_VIEW);
         val uri =
@@ -117,6 +120,8 @@ class ReportDetailsActivity : AppCompatActivity() {
         startActivity(Intent.createChooser(intent, "Open"))
     }
 
+
+    //function to open to dialer for contacting student
     private fun openDialer(phoneNo: HashMap<String, String>) {
         contact.setOnClickListener {
             val u = Uri.parse("tel:" + phoneNo["dial_code"] + " " + phoneNo["phone_no"])
@@ -129,10 +134,13 @@ class ReportDetailsActivity : AppCompatActivity() {
         }
     }
 
+
     private fun getData(field: String): String {
         return doc.data?.get(field).toString()
     }
 
+
+    //function to download media and saving locally
     private fun downloadMedia() {
         var httpsReference = FirebaseStorage.getInstance().getReferenceFromUrl(reportMedia)
 
@@ -169,10 +177,7 @@ class ReportDetailsActivity : AppCompatActivity() {
     }
 
 
-    //------------------------------------------------------------
-    //------------------PERMISSION -------------------------------
-    //------------------------------------------------------------
-
+    //checking permissions
     private fun checkPermission(): Boolean {
         val result1 = ContextCompat.checkSelfPermission(
             applicationContext,
@@ -184,6 +189,8 @@ class ReportDetailsActivity : AppCompatActivity() {
         return result1 == PackageManager.PERMISSION_GRANTED
     }
 
+
+    //requesting permissions
     private fun requestPermission() {
         ActivityCompat.requestPermissions(
             this,

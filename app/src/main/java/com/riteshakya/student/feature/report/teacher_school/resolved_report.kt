@@ -36,7 +36,7 @@ class SolvedReports : Fragment() {
     ): View? =
         inflater.inflate(R.layout.fragment_resolved_report, container, false)
 
-
+    // populate the views now that the layout has been inflated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,6 +44,8 @@ class SolvedReports : Fragment() {
         solved_recyclerview.layoutManager = mLayoutManager
         buildResolvedReports(solved_recyclerview, Timestamp(Date(1, 1, 1)))
 
+
+        //function for scroll listner for implementing pagination
         solved_recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy > 0) {
@@ -60,6 +62,8 @@ class SolvedReports : Fragment() {
         })
     }
 
+
+    //building reports with pagination
     private fun buildResolvedReports(
         recyclerView: RecyclerView,
         id: Timestamp

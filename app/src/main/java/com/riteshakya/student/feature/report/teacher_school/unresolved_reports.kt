@@ -43,9 +43,10 @@ class UnsolvedReports : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mLayoutManager = LinearLayoutManager(context)
         unsolved_recyclerview.layoutManager = mLayoutManager
-
         buildUnresolvedReports(unsolved_recyclerview, Timestamp(Date(1, 1, 1)))
 
+
+        //function for scroll listner for implementing pagination
         unsolved_recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy > 0) {
@@ -62,6 +63,7 @@ class UnsolvedReports : Fragment() {
         })
     }
 
+    //building reports with pagination
     private fun buildUnresolvedReports(
         recyclerView: RecyclerView,
         id: Timestamp

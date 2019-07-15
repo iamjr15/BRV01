@@ -49,6 +49,7 @@ class ReportHandler {
     }
 
 
+    //getting student's reports both resolved and unresolved
     fun getStudentReports(): Single<ArrayList<ReportModel>> {
         val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
         val db = FirebaseFirestore.getInstance()
@@ -73,6 +74,9 @@ class ReportHandler {
         }
     }
 
+
+
+    //getting unresolved reports for management and teacher
     fun getManagementUnresolvedReport(
         startAfter: Timestamp,
         limit: Int
@@ -138,6 +142,8 @@ class ReportHandler {
         }
     }
 
+
+    //getting resolved reports for management and teacher
     fun getManagementResolvedReport(
         startAfter: Timestamp,
         limit: Int
@@ -196,6 +202,8 @@ class ReportHandler {
         }
     }
 
+
+    //updating reports status for resolved
     fun updateReport(reportId: String, data: Map<String, Any>): Single<String> {
         val updateReportReference =
             FirebaseFirestore.getInstance().collection("reports").document(reportId)
@@ -211,6 +219,8 @@ class ReportHandler {
     }
 
 
+
+    //getting details of user
     fun studentDetails(userId: String): Single<DocumentSnapshot> {
         val updateReportReference =
             FirebaseFirestore.getInstance().collection("users").document(userId)
@@ -225,6 +235,8 @@ class ReportHandler {
         }
     }
 
+
+    //function to calculate number of reporting left in an month
     fun reportLeft(max: Int): Single<Int> {
         val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
         val currentDate = Date(Date().year, Date().month, 1)
